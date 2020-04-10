@@ -1,0 +1,4 @@
+export const FETCH_ALL_PRODUCTS="FETCH_ALL_PRODUCTS";
+export const GET_PRODUCTS="GET_PRODUCTS";
+export const HIDE_LOADER="HIDE_LOADER";
+export const SHOW_LOADER="SHOW_LOADER";
