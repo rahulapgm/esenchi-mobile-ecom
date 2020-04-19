@@ -1,45 +1,88 @@
-import * as React from 'react';
-import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
+import * as React from "react";
+import {createMaterialBottomTabNavigator} from "@react-navigation/material-bottom-tabs";
+import {MaterialCommunityIcons} from "react-native-vector-icons";
 
-import TabBarIcon from '../components/TabBarIcon';
-import HomeScreen from '../screens/HomeScreen';
-import LinksScreen from '../screens/LinksScreen';
-import MyAccountScreen from '../screens/MyAccountScreen';
+import HomeScreen from "../screens/HomeScreen";
+import MyAccountScreen from "../screens/MyAccountScreen";
+import CartScreen from "../screens/CartScreen";
 
-// const BottomTab = createMaterialBottomTabNavigator();
-const INITIAL_ROUTE_NAME = 'Home';
 const BottomTab = createMaterialBottomTabNavigator();
+const INITIAL_ROUTE_NAME = "Home";
+// const BottomTab = createBottomTabNavigator();
 
-export default function BottomTabNavigator({ navigation }) {
-  // navigation.setOptions({ headerTitle: getHeaderTitle(route) });
-  return (
-    <BottomTab.Navigator initialRouteName={INITIAL_ROUTE_NAME}>
-      <BottomTab.Screen
-        name="Home"
-        component={HomeScreen}
-        options={{
-          title: 'H O M E',
-          tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} name="md-home" />,
-        }}
-      />
-      <BottomTab.Screen
-        name="Links"
-        component={LinksScreen}
-        options={{
-          title: 'C A R T',
-          tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} name="md-cart" />,
-        }}
-      />
-      <BottomTab.Screen
-        name="MyAccount"
-        component={MyAccountScreen}
-        options={{
-          title: 'MY ACCOUNT',
-          tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} name="md-person" />,
-        }}
-      />
-    </BottomTab.Navigator>
-  );
+const config = {
+	animation: "spring",
+	config: {
+		stiffness: 1000,
+		damping: 500,
+		mass: 3,
+		overshootClamping: true,
+		restDisplacementThreshold: 0.01,
+		restSpeedThreshold: 0.01,
+	},
+};
+
+export default function BottomTabNavigator({navigation}) {
+	// navigation.setOptions({ headerTitle: "rahul"});
+	return (
+		<BottomTab.Navigator
+			initialRouteName={INITIAL_ROUTE_NAME}
+			barStyle={{backgroundColor: "white"}}
+			activeColor="blue"
+			options={{
+				header: {
+					left: null,
+				},
+			}}>
+			<BottomTab.Screen
+				name="Home"
+				component={HomeScreen}
+				options={{
+					title: "H O M E",
+					tabBarIcon: ({color}) => (
+						<MaterialCommunityIcons name="home" color={color} size={26} />
+					),
+					transitionSpec: {
+						open: config,
+						close: config,
+					},
+				}}
+			/>
+			<BottomTab.Screen
+				name="Links"
+				component={CartScreen}
+				options={{
+					title: "C A R T",
+					tabBarIcon: ({color}) => (
+						<MaterialCommunityIcons name="shopping" color={color} size={26} />
+					),
+					transitionSpec: {
+						open: config,
+						close: config,
+					},
+				}}
+			/>
+			<BottomTab.Screen
+				name="MyAccount"
+				component={MyAccountScreen}
+				options={{
+					title: "MY ACCOUNT",
+					tabBarIcon: ({color}) => (
+						<MaterialCommunityIcons
+							name="account"
+							color={color}
+							backgroundColor="green"
+							size={26}
+						/>
+					),
+					transitionSpec: {
+						open: config,
+						close: config,
+					},
+				}}
+			/>
+		</BottomTab.Navigator>
+	);
 }
 
 // function getHeaderTitle(route) {

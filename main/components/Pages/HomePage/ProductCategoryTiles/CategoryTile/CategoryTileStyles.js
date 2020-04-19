@@ -8,6 +8,7 @@ export const styles = StyleSheet.create({
     justifyContent: "space-around",
     margin: 6,
     padding: 6,
+    shadowColor: "#cccccc",
     backgroundColor: "white",
     shadowOffset: { width: 3, height: 3 },
     shadowOpacity: 1,

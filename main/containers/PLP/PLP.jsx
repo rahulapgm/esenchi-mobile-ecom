@@ -1,40 +1,42 @@
 import React from "react";
 import { connect } from "react-redux";
-import { getProducts } from "../../../store/actions";
+import { createStructuredSelector } from "reselect";
 
-// import Loader from "../../components/Loader";
+import { View, StyleSheet } from "react-native";
+
+import { getProducts } from "./actions";
+import { makeSelectProductList } from './selectors';
 import Loader from "../../hoc/Loader";
 import ProductList from "../../components/ProductList";
-import { View, ScrollView, Text, StyleSheet } from "react-native";
+
 
 class PLP extends React.Component {
   constructor(props) {
     super(props);
   }
-  componentDidMount() {
+  componentDidMount () {
     this.props.getProducts();
   }
 
-  render() {
+  render () {
     return (
       <View>
-        <Loader showLoader={this.props.loader}><ProductList /></Loader>
+        <Loader showLoader={this.props.loader}>
+          <ProductList {...this.props} />
+        </Loader>
         {/* {!this.props.loader ? <ProductList /> : <Loader />} */}
       </View>
     );
   }
 }
 
-const styles = StyleSheet.create({
-});
+const styles = StyleSheet.create({});
 
-const mapStateToProps = state => {
-  const { products, loader } = state;
-  return {
-    products,
-    loader
-  };
-};
+const mapStateToProps = state =>
+  createStructuredSelector({
+    productList: makeSelectProductList()
+  })
+
 
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
