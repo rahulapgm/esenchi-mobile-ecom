@@ -1,6 +1,8 @@
 import axios from "axios";
 import { apiEndPoints } from "../configs/apiEndpoints";
 
+export const siteURL = "https://sanchi-server-app.herokuapp.com";
+
 export function* triggerAPIRequest(key, method, data = {}) {
 	let entryPoint = "";
 	let token = "";
