@@ -10,11 +10,9 @@ class ProductCategoryTiles extends React.Component {
   constructor(props) {
     super(props);
   }
-  _navigateToCategoryPLP(){
-
-  }
+  _navigateToCategoryPLP() {}
   render() {
-    return <ProductCategoryTilesComponent {...this.props}/>;
+    return <ProductCategoryTilesComponent {...this.props} />;
   }
 }
 const mapStateToProps = state => {
@@ -32,6 +30,4 @@ const withConnect = connect(
   mapStateToProps,
   mapDispatchToProps
 );
-export default compose(
-  withConnect
-)(ProductCategoryTiles);
+export default compose(withConnect)(ProductCategoryTiles);

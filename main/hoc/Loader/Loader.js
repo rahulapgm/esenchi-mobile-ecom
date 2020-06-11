@@ -19,7 +19,7 @@ class Loader extends React.Component {
             top: 48
           }}
         >
-         <Text>Loading....</Text>
+          <Text>Loading....</Text>
         </View>
       );
     }

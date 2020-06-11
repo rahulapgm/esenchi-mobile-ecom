@@ -3,7 +3,7 @@ import { View, ScrollView } from "react-native";
 
 import ProductCategoryTiles from "../../../containers/Pages/HomePage/ProductCategoryTiles";
 import PLP from "../../../containers/PLP";
- import ProductSearch from "../../../containers/ProductSearch";
+import ProductSearch from "../../../containers/ProductSearch";
 import Banner from "../../common/Banner/Banner";
 
 export class HomePage extends React.Component {
@@ -12,9 +12,7 @@ export class HomePage extends React.Component {
   }
   render() {
     return (
-
       <React.Fragment>
-        <ProductSearch />
         <ScrollView
           style={{ flex: 1, flexDirection: "column" }}
           contentContainerStyle={{ flexGrow: 1 }}
