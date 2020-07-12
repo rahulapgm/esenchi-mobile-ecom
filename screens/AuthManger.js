@@ -9,7 +9,9 @@ import {
 
 class AuthManager extends React.Component {
   componentDidMount() {
-    this._bootstrapAsync();
+    this._unsubscribe = this.props.navigation.addListener("focus", () => {
+      this._bootstrapAsync();
+    });
   }
 
   // Fetch the token from storage then navigate to our appropriate place

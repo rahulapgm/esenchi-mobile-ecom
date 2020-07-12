@@ -48,10 +48,6 @@ export const loginReducer = (state = initialState, { type, data, error }) => {
 		case VALIDATE_OTP_ERR:
 			return state.set("isError", data);
 		case IS_FETCHING_OTP:
-			console.log("\n****State****\n");
-			console.log(fromJS(state));
-			console.log("\n*************\n");
-			console.log("is fetching otp*******\n", { type, data });
 			return state.set("isFetchingOTP", data);
 		default:
 			return state;

@@ -4,21 +4,21 @@ import { createStructuredSelector } from "reselect";
 
 import { View, StyleSheet } from "react-native";
 
-import { getProducts } from "./actions";
-import { makeSelectProductList } from './selectors';
+import { getProducts, addProductToCart } from "./actions";
+import { makeSelectProductList } from "./selectors";
 import Loader from "../../hoc/Loader";
-import ProductList from "../../components/ProductList";
+import ProductList from "../../components/ProductList/ProductList";
 
 
 class PLP extends React.Component {
   constructor(props) {
     super(props);
   }
-  componentDidMount () {
+  componentDidMount() {
     this.props.getProducts();
   }
 
-  render () {
+  render() {
     return (
       <View>
         <Loader showLoader={this.props.loader}>
@@ -35,13 +35,15 @@ const styles = StyleSheet.create({});
 const mapStateToProps = state =>
   createStructuredSelector({
     productList: makeSelectProductList()
-  })
-
+  });
 
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
     getProducts: () => {
       dispatch(getProducts());
+    },
+    addToCart: (data) => {
+      dispatch(addProductToCart(data));
     }
   };
 };

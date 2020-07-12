@@ -8,7 +8,6 @@ class Loader extends React.Component {
   }
   render() {
     const { showLoader = false } = this.props;
-    // console.log("showloder", showLoader);
     if (showLoader) {
       return (
         <View

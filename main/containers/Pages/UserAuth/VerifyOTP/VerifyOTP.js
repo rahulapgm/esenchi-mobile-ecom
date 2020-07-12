@@ -29,13 +29,11 @@ class VerifyOTP extends React.Component {
     // this.props.navigation.navigate("App");
   };
   componentDidUpdate(prevProps, nextProps) {
-    console.log(prevProps, "\n", nextProps);
     if (prevProps.loginDataFetched && this.state.userToken) {
       // this.props.navigation.navigate("App");
     }
   }
   render() {
-    console.log("Verify OTP Container Props - ", this.props);
     const { isFetching } = this.props;
     return (
       <Loader showLoader={isFetching}>
