@@ -22,7 +22,6 @@ export const viewCartItemsSucess = data => {
 };
 
 export const viewCartItemsError = data => {
-  console.log("cart error triggered");
   return {
     type: VIEW_CART_ITEM_ERROR,
     data

@@ -16,7 +16,6 @@ export const Checkout = props => {
     isOrderApiFetching,
     currentOrderAPIStatus = null
   } = props;
-  // console.log("Checkout ->", cartDetailsObj);
   const { cartProductItems = [], cartTotalAmount = 0 } = cartDetailsObj;
   if (currentOrderAPIStatus && currentOrderAPIStatus.status === "failed") {
     return (
@@ -66,7 +65,6 @@ export const Checkout = props => {
         </Text>
         <Button
           onPress={() => {
-            console.log("checkout clicked!");
             props.navigation.navigate("Checkout");
           }}
           isGradient={true}

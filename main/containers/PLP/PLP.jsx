@@ -20,12 +20,13 @@ class PLP extends React.Component {
 
   render() {
     return (
-      <View>
+      <React.Fragment>
         <Loader showLoader={this.props.loader}>
-          <ProductList {...this.props} />
+          <View></View>
+          { /* <ProductList {...this.props} /> */ }
         </Loader>
         {/* {!this.props.loader ? <ProductList /> : <Loader />} */}
-      </View>
+      </React.Fragment>
     );
   }
 }

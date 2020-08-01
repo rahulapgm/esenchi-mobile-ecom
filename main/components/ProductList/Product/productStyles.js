@@ -10,11 +10,12 @@ export const styles = StyleSheet.create({
     shadowOffset: { width: 3, height: 3 },
     shadowOpacity: 1.0,
     borderRadius: 4,
-    elevation: 3
+    elevation: 3,
+    minHeight:160
   },
 
   prdDescriptionSec: {
-    flex: 1.44,
+    flex: 1,
     padding: 6,
     flexDirection: "column",
     alignItems: "flex-start"

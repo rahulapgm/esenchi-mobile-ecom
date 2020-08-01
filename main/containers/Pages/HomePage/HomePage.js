@@ -4,69 +4,68 @@ import { createStructuredSelector } from "reselect";
 import { View, ActivityIndicator, StatusBar, Alert } from "react-native";
 import HomePageComponent from "../../../components/Pages/HomePage/HomePage";
 
-import {getCategoryList} from "../../CategoryDrawer/actions";
+import { getCategoryList } from "../../CategoryDrawer/actions";
+import { makeSelectCategoryList } from "../../CategoryDrawer/selectors";
+import toJS from '../../../hoc/toJS/toJS';
 
 class HomePage extends React.Component {
   constructor(props) {
     super(props);
   }
 
-  componentDidMount(){
+  componentDidMount() {
     this.props.fetchCategoryList();
   }
   render() {
-    return <HomePageComponent />;
+    return <HomePageComponent {...this.props} />;
   }
 }
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = dispatch => {
   return {
-    fetchCategoryList: () => {dispatch(getCategoryList())}
+    fetchCategoryList: () => dispatch(getCategoryList())
   };
 };
-const mapStateToProps = createStructuredSelector({})
+const mapStateToProps = createStructuredSelector({});
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(HomePage);
+)(toJS(HomePage));
 
-
-
-
-    // const token = AsyncStorage.getItme("userToken");
-    // if (this.props.loader) {
-    //   return (
-    //     <View
-    //       style={{
-    //         flexDirection: "column",
-    //         justifyContent: "center",
-    //         alignItems: "center",
-    //         top: 32
-    //       }}
-    //     >
-    //       <ActivityIndicator />
-    //     </View>
-    //   );
-    // } else if (this.props.isError) {
-    //   <View
-    //     style={{
-    //       flexDirection: "column",
-    //       justifyContent: "center",
-    //       alignItems: "center",
-    //       top: 32
-    //     }}
-    //   >
-    //     {Alert.alert(
-    //       "Wrong OTP",
-    //       "You have entered wrong otp key, please try again!",
-    //       [
-    //         {
-    //           text: "OK",
-    //           onPress: () => this.props.navigation.navigate("Auth")
-    //         }
-    //       ],
-    //       { cancelable: false }
-    //     )}
-    //   </View>;
-    // }
+// const token = AsyncStorage.getItme("userToken");
+// if (this.props.loader) {
+//   return (
+//     <View
+//       style={{
+//         flexDirection: "column",
+//         justifyContent: "center",
+//         alignItems: "center",
+//         top: 32
+//       }}
+//     >
+//       <ActivityIndicator />
+//     </View>
+//   );
+// } else if (this.props.isError) {
+//   <View
+//     style={{
+//       flexDirection: "column",
+//       justifyContent: "center",
+//       alignItems: "center",
+//       top: 32
+//     }}
+//   >
+//     {Alert.alert(
+//       "Wrong OTP",
+//       "You have entered wrong otp key, please try again!",
+//       [
+//         {
+//           text: "OK",
+//           onPress: () => this.props.navigation.navigate("Auth")
+//         }
+//       ],
+//       { cancelable: false }
+//     )}
+//   </View>;
+// }

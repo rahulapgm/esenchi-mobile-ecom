@@ -1,7 +1,6 @@
 import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 
-import CartPage from "../main/containers/Pages/Cart";
 import HeaderBackButton from "../main/components/custom/HeaderBackButton";
 
 import ProductListing from "../main/containers/ProductListing/ProductListing";
@@ -23,7 +22,10 @@ export const CategoryListingScreen = ({ navigation }) => {
         name="CategoryListing"
         component={ProductListing}
         options={{
-          headerTitleAlign: "center"
+          headerTitleAlign: "center",
+          headerLeft: () => (
+            <HeaderBackButton navigation={navigation} targetPage="App" />
+          )
         }}
       />
     </Stack.Navigator>

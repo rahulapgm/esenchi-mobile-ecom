@@ -1,32 +1,38 @@
 import { put, takeLatest, delay } from "redux-saga/effects";
 import {
-  getProductsListOnCategory,
   setProductsListOnCategory,
-  fetchErrorOnProductCategory
+  fetchErrorOnProductCategory,
+  showProductListLoader
 } from "./actions";
 import {
   GET_PRODUCTS_ON_CATEGORY,
-  SET_PRODUCTS_ON_CATEGORY,
-  FETCH_ERROR_PRODCUT_LISTING
 } from "./constants";
 
 import triggerAPIRequest from "../../utils/apiUtils";
 
-export function* fetchProductsOnCategory(data = {}) {
+export function* fetchProductsOnCategory(actionObj) {
+
+  yield put(showProductListLoader(true));
+
   try {
+    const data = actionObj && actionObj.data
     const response = yield triggerAPIRequest(
-      "getProductsByFilter",
-      "GET",
+      "searchProducts",
+      "POST",
       data
     );
     if (response && response.status == 200) {
-      // console.log("products -> \n", response.data);
-      yield put(setProductsListOnCategory(response.data));
+      const {docs = [], isAllDocumentLoaded} = response.data;
+      console.log("isAllDocumentLoaded -> ",isAllDocumentLoaded);
+      yield put(setProductsListOnCategory({docs, isAllDocumentLoaded}));
+      yield put(showProductListLoader(false));
     } else {
       yield put(fetchErrorOnProductCategory(response));
+      yield put(showProductListLoader(false));
     }
   } catch (e) {
     yield put(fetchErrorOnProductCategory(e));
+    yield put(showProductListLoader(false));
   }
 }
 

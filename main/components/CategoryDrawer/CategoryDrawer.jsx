@@ -16,13 +16,13 @@ export class CategoryDrawer extends React.PureComponent {
   constructor(props) {
     super(props);
     this.state = {
-      expanded: false
+      expandedCategoryId: null
     };
   }
 
-  _handlePress = () =>
+  _handlePress = (categoryId) =>
     this.setState({
-      expanded: !this.state.expanded
+      expandedCategoryId: categoryId
     });
 
   render() {
@@ -50,13 +50,23 @@ export class CategoryDrawer extends React.PureComponent {
             }}
           >
             {categoryList &&
-              categoryList.map((item, index) => {
+              categoryList.map((item) => {
                 return (
                   <ShadowBox
                     key={item.categoryId}
                     style={{ margin: 1, borderRadius: 0, padding: 2 }}
                   >
-                    <List.Accordion title={item.categoryName}>
+                    <List.Accordion
+                      title={item.categoryName}
+                      expanded={this.state.expandedCategoryId===item.categoryId}
+                      onPress={() => {
+                        if(this.state.expandedCategoryId === item.categoryId){
+                          this._handlePress(null)
+                        } else {
+                          this._handlePress(item.categoryId)
+                        }
+                      }}
+                      >
                       {item.subCategoryList &&
                         item.subCategoryList.map(subCategoryItem => {
                           return (

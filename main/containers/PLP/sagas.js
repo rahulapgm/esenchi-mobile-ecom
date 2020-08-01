@@ -28,10 +28,7 @@ export function* updateCartItem({data}) {
   data.customerPh = "+919633882121";
   const response = yield triggerAPIRequest("addCartItem", "POST", data);
   if (response && response.status == 200) {
-    console.log("products -> \n", response.data);
-    // yield put(setProductList(response.data));
   } else {
-    console.log("products -> \n", response);
     yield put(getProductsError(response));
   }
 }

@@ -10,6 +10,7 @@ const Product = props => {
   const {
     productId,
     productName,
+    productMalayalamName,
     productCategory,
     pricingDetails = {},
     selectedPricingSkuIndex = 0,
@@ -22,6 +23,7 @@ const Product = props => {
     Object(selectedSku)
   );
 
+
   // console.log("*******************************************************\n");
   // console.log("selectedSkuIndex: ", selectedPricingSkuIndex);
   // console.log("currentSelectedSku: ", currentSelectedSku);
@@ -30,6 +32,7 @@ const Product = props => {
   const cartPushingProductObj = {
     productId,
     productName,
+    productMalayalamName,
     productCategory,
     selectedSku: currentSelectedSku
   };
@@ -44,11 +47,11 @@ const Product = props => {
           }}
         />
         <Text style={styles.discountStyle}>
-          Save {currentSelectedSku["discount"]} Rs.
+          Save {currentSelectedSku.discount} Rs.
         </Text>
       </View>
       <View style={styles.prdDescriptionSec}>
-        <Text style={styles.prdNameText}>{productName}</Text>
+        <Text style={styles.prdNameText}>{productName} ({productMalayalamName})</Text>
 
         <Text style={styles.price}>
           <Text style={styles.strikedPrice}>
@@ -65,14 +68,14 @@ const Product = props => {
           />
         </View>
 
-        <Text style={styles.deliveryMsgText}>
+        {/* <Text style={styles.deliveryMsgText}>
           Est Delivery before
           <Text
             style={{ fontWeight: "bold", fontStyle: "normal", color: "green" }}
           >
             Tomorrow 6 P.M
           </Text>
-        </Text>
+        </Text> */}
 
         <TouchableOpacity onPress={()=>{addToCart({productId, selectedPricingSkuIndex})}} style={styles.addToCartBtn}>
           <Text style={styles.addToCartBtnText}>ADD TO CART</Text>

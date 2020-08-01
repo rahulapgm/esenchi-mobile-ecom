@@ -25,38 +25,12 @@ const Stack = createStackNavigator();
 export const HomeScreen = ({ navigation }) => {
   const insets = useSafeArea();
   return (
-    <Stack.Navigator>
-      <Stack.Screen
-        name="HomeMain"
-        component={HomePage}
-        options={{
-          safeAreaInsets: {
-            top: insets.top + 6
-          },
-          headerTitle: props => <ProductSearch {...props} />,
-          headerLeft: props => (
-            <Brand
-              {...props}
-              brandIcon={styles.brandIcon}
-              brandTitle={styles.brandTitle}
-              brandViewStyle={styles.brandViewStyle}
-            />
-          ),
-          headerRight: props => (
-            <TouchableOpacity
-              onPress={() => navigation.toggleDrawer()}
-              style={{
-                color: "#0099ff",
-                backgroundColor: "white",
-                fontSize: 20,
-                paddingHorizontal: 26
-              }}
-            >
-              <MaterialCommunityIcons name="menu" size={36} />
-            </TouchableOpacity>
-          )
-        }}
-      />
+    <Stack.Navigator
+      screenOptions={{
+        headerShown: false
+      }}
+    >
+      <Stack.Screen name="HomeMain" component={HomePage} />
     </Stack.Navigator>
   );
 };
@@ -115,3 +89,26 @@ export default homeWithCategoryNavigator;
 //     </View>
 //   );
 // };
+
+// headerTitle: props => <ProductSearch {...props} />,
+// headerLeft: props => (
+//   <Brand
+//     {...props}
+//     brandIcon={styles.brandIcon}
+//     brandTitle={styles.brandTitle}
+//     brandViewStyle={styles.brandViewStyle}
+//   />
+// ),
+// headerRight: props => (
+//   <TouchableOpacity
+//     onPress={() => navigation.toggleDrawer()}
+//     style={{
+//       color: "#0099ff",
+//       backgroundColor: "white",
+//       fontSize: 20,
+//       paddingHorizontal: 26
+//     }}
+//   >
+//     <MaterialCommunityIcons name="menu" size={36} />
+//   </TouchableOpacity>
+// )

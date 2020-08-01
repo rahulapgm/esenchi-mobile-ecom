@@ -16,7 +16,6 @@ export class Cart extends React.Component {
   }
 
   alertOnRemove = obj => {
-    console.log(obj.productName);
     const { removeCartProductItem } = this.props;
     const { productId } = obj;
     return Alert.alert(
@@ -25,7 +24,7 @@ export class Cart extends React.Component {
       [
         {
           text: "No",
-          onPress: () => console.log("No Pressed"),
+          onPress: () => {},
           style: "cancel"
         },
         {
@@ -88,12 +87,10 @@ export class Cart extends React.Component {
     const others = [];
 
     cartProductItems.map(obj => {
-      if (obj.productCategory === "Vegetables") {
+      if (obj.productCategory && obj.productCategory.toLowerCase().indexOf("vegetable") > -1){
         vegetables.push(obj);
-      } else if (obj.productCategory === "Groceries") {
-        groceries.push(obj);
       } else {
-        others.push(obj);
+        groceries.push(obj);
       }
     });
 
@@ -138,25 +135,7 @@ export class Cart extends React.Component {
                   >
                     GROCERIES
                   </Text>
-                  {vegetables.map(obj => {
-                    return this.renderItemMarkup(obj);
-                  })}
-                </ShadowBox>
-              )}
-
-              {others.length > 0 && (
-                <ShadowBox>
-                  <Text
-                    style={{
-                      textAlign: "center",
-                      paddingVertical: 6,
-                      fontWeight: "bold",
-                      fontSize: 16
-                    }}
-                  >
-                    OTHERS
-                  </Text>
-                  {vegetables.map(obj => {
+                  {groceries.map(obj => {
                     return this.renderItemMarkup(obj);
                   })}
                 </ShadowBox>
