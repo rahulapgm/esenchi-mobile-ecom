@@ -1,16 +1,17 @@
 import React, { useState } from "react";
 import { Text, View, Image, TouchableOpacity } from "react-native";
+import { ActivityIndicator, Colors } from 'react-native-paper';
 // import Button from "../../custom/Button/Button";
 
 import { styles } from "./ProductV2Styles";
 import Dropdown from "../../../custom/Dropdown";
 
 const Product = props => {
-  const { product, addToCart } = props;
+  const { product, addToCart, isUpdatingCartId } = props;
   const {
     productId,
     productName,
-    productMalayalamName="",
+    productMalayalamName = "",
     productCategory,
     pricingDetails = {},
     selectedPricingSkuIndex = "",
@@ -50,7 +51,7 @@ const Product = props => {
         />
       </View>
       <View style={styles.prdDescriptionSec}>
-        <View style={{flexDirection:"row", width:"100%"}}>
+        <View style={{ flexDirection: "row", width: "100%" }}>
           <Text style={styles.prdNameText}>{productName} ({productMalayalamName})</Text>
 
           <Text style={styles.price}>
@@ -80,11 +81,18 @@ const Product = props => {
         </Text> */}
 
         <TouchableOpacity
-          onPress={()=> {
-            addToCart({productId, selectedPricingSkuIndex:currentSelectedSku.skuIndex, productName})
+          onPress={() => {
+            addToCart({ productId, selectedPricingSkuIndex: currentSelectedSku.skuIndex, productName });
           }}
           style={styles.addToCartBtn}>
-          <Text style={styles.addToCartBtnText}>ADD TO CART</Text>
+          {
+            isUpdatingCartId === productId
+              ? <ActivityIndicator animating={true} color={Colors.white} size={17} style={{ width: "100%" }} />
+              : (
+
+                <Text style={styles.addToCartBtnText}>ADD TO CART</Text>
+              )
+          }
         </TouchableOpacity>
       </View>
     </View>
