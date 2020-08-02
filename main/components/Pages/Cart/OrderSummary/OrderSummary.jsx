@@ -1,6 +1,7 @@
 import React from "react";
 
 import { View, Text, TouchableOpacity } from "react-native";
+import { Paragraph, Title } from 'react-native-paper';
 import ShadowBox from "../../../../hoc/ShadowBox";
 
 import styles from "./styles";
@@ -9,35 +10,36 @@ export const OrderSummary = ({
   cartTotalAmount,
   cartTotalSavings,
   cartTotalMRPRate,
-  navigation
+  navigation,
+  userAddress=""
 }) => {
   return (
     <ShadowBox style={styles.container}>
-      <Text style={styles.titleStyle}>ORDER SUMMARY</Text>
+      <Title style={styles.titleStyle}>ORDER SUMMARY</Title>
 
-      <View style={{ flexDirection: "row" }}>
-        <Text style={styles.totalAmtContainer}>
-          Total Amount:{" "}
+      <View style={{ flexDirection: "column" }}>
+        <Paragraph style={styles.totalAmtContainer}>
+          TOTAL AMOUNT:{" "}
           <Text style={styles.mrpRateText}>{` ${cartTotalMRPRate} `}</Text>
-          {`  ${cartTotalAmount}`} Rs.
-        </Text>
-        <Text style={styles.savingMsgText}>
-          You saved {cartTotalSavings} Rs.
-        </Text>
+          <Text style={{color:'blue'}}>{`  ${cartTotalAmount}`} Rs.</Text>
+        </Paragraph>
+        <Paragraph style={styles.savingMsgText}>
+          You saved <Text style={{color:"blue"}}>{cartTotalSavings} Rs.</Text>
+        </Paragraph>
       </View>
 
-      <Text style={{ paddingTop: 6, paddingHorizontal: 6 }}>
+      <Paragraph style={{ marginTop:12 }}>
         Delivery address:
-        <Text
+        <Paragraph
           style={styles.deliveryAddress}
-        >{` Near CA High School, Peruvemba, Palakkad, Pin:678531`}</Text>
-      </Text>
+        >{` ${userAddress}`}</Paragraph>
+      </Paragraph>
       <TouchableOpacity
         onPress={() => {
           navigation.navigate("ChangeAddress");
         }}
       >
-        <Text style={styles.changeAddress}>Change Address</Text>
+        <Paragraph style={styles.changeAddress}>Change Address</Paragraph>
       </TouchableOpacity>
     </ShadowBox>
   );

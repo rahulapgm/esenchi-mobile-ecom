@@ -6,15 +6,12 @@ export const styles = StyleSheet.create({
     flex: 1,
     textAlign: "center",
     paddingVertical: 6,
-    fontWeight: "bold",
-    fontSize: 16
   },
   totalAmtContainer: {
     flex: 1,
     textAlign: "left",
     fontWeight: "bold",
     fontSize: 14,
-    color: "blue"
   },
   mrpRateText: {
     color: "#260505",
@@ -22,11 +19,8 @@ export const styles = StyleSheet.create({
     textDecorationStyle: "solid"
   },
   savingMsgText: {
-    flex: 0.6,
-    textAlign: "right",
     paddingRight: 6,
     fontSize: 14,
-    color: "#11bd47",
     fontWeight: "bold"
   },
   deliveryAddress: {
@@ -35,7 +29,7 @@ export const styles = StyleSheet.create({
     fontWeight: "bold",
     textAlign: "left"
   },
-  changeAddress: { color: "#1a75ff", textDecorationLine: "underline", paddingHorizontal:6 }
+  changeAddress: { color: "#1a75ff", textDecorationLine: "underline" }
 });
 
 

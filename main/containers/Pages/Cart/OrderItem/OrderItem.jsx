@@ -9,7 +9,6 @@ import { updateItemQuantity, removeOrderItem } from "./actions";
 
 import OrderItemComponent from "../../../../components/Pages/Cart/OrderItem/OrderItem";
 
-import {makeProductIdUpdating} from '../selectors';
 
 export const OrderItem = props => {
   return <OrderItemComponent {...props} />;

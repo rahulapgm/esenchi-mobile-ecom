@@ -6,7 +6,7 @@ export const styles = StyleSheet.create({
     flexDirection: "column",
     alignItems: "center",
     justifyContent: "space-around",
-    margin: 6,
+    marginHorizontal: 6,
     padding: 6,
     shadowColor: "#cccccc",
     backgroundColor: "white",

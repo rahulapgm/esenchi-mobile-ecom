@@ -3,7 +3,7 @@ import { Text, TouchableOpacity } from "react-native";
 import { createStackNavigator } from "@react-navigation/stack";
 
 import { MaterialCommunityIcons } from "react-native-vector-icons";
-import Checkout from "../main/containers/Pages/Checkout";
+import Checkout from "../main/containers/Pages/Checkout/Checkout";
 import HeaderBackButton from "../main/components/custom/HeaderBackButton";
 
 const Stack = createStackNavigator();

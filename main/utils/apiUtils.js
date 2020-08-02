@@ -7,6 +7,7 @@ export function* triggerAPIRequest(key, method = "GET", data = {}) {
   let entryPoint = "";
   let token = "";
   let options = {};
+  data.customerPh = "+919633882121";
   if (apiEndPoints[key]) {
     entryPoint = `${siteURL}${apiEndPoints[key]}`;
     console.log("entryPoint => ", entryPoint);
@@ -35,9 +36,7 @@ export function* triggerAPIRequest(key, method = "GET", data = {}) {
         }
       };
     }
-    const response = yield axios(options)
-      .then(response => response)
-      .catch(err => err);
+    const response = yield axios(options);
     return response;
   }
   return null;

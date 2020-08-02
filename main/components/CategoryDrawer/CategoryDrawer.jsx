@@ -10,8 +10,6 @@ import { List, Checkbox } from "react-native-paper";
 
 import ShadowBox from "../../hoc/ShadowBox";
 
-import * as RootNavigation from "../../../RootNavigation";
-
 export class CategoryDrawer extends React.PureComponent {
   constructor(props) {
     super(props);

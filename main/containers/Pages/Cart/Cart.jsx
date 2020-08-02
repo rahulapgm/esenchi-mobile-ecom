@@ -20,6 +20,10 @@ import {
   makeSelectOrderApiFetching
 } from "./selectors";
 
+import { selectUserAddress } from '../ChangeAddress/selectors';
+
+import { getUserAddress } from '../ChangeAddress/actions';
+
 export class Cart extends PureComponent {
   constructor(props) {
     super(props);
@@ -37,6 +41,9 @@ export class Cart extends PureComponent {
 
   onScreenFocus = () => {
     this.props.fetchCartItems();
+    if(!this.props.userAddress){
+      this.props.getUserAddress();
+    }
   };
 
   render() {
@@ -58,7 +65,8 @@ export class Cart extends PureComponent {
 const mapStateToProps = createStructuredSelector({
   cartDetailsObj: makeSelectCartItems(),
   updatingProductId: makeProductIdUpdating(),
-  isOrderApiFetching: makeSelectOrderApiFetching()
+  isOrderApiFetching: makeSelectOrderApiFetching(),
+  userAddress: selectUserAddress()
 });
 
 const mapDispatchToProps = dispatch => {
@@ -70,7 +78,8 @@ const mapDispatchToProps = dispatch => {
     removeCartProductItem: productId => {
       dispatch(removeCartItem(productId));
     },
-    setOrderAPIFetchingState: data => dispatch(orderAPIFetching(data))
+    setOrderAPIFetchingState: data => dispatch(orderAPIFetching(data)),
+    getUserAddress: () => dispatch(getUserAddress())
   };
 };
 

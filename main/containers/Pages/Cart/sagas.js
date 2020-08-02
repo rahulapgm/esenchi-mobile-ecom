@@ -1,4 +1,4 @@
-import { put, takeLatest, delay } from "redux-saga/effects";
+import { put, takeLatest, delay, select } from "redux-saga/effects";
 
 import {
   VIEW_CART_ITEMS,
@@ -16,17 +16,22 @@ import { updateFetchingProductId } from "./OrderItem/actions";
 
 import triggerAPIRequest from "../../../utils/apiUtils";
 
+import { makeSelectOrderApiFetching } from "./selectors";
+
 export function* fetchUserCartItems() {
   const data = { customerPh: "+919633882121" };
-  yield put(orderAPIFetching(true));
-  const response = yield triggerAPIRequest("viewCart", "POST", data);
-  if (response && response.status == 200) {
-    // console.log("Cart Items", response.data);
-    yield put(viewCartItemsSucess(response.data));
-    yield put(orderAPIFetching(false));
-  } else {
-    yield put(viewCartItemsError(response));
-    yield put(orderAPIFetching(false));
+  const isOrderApiFetching = yield select(makeSelectOrderApiFetching());
+  if (!isOrderApiFetching) {
+    yield put(orderAPIFetching(true));
+    const response = yield triggerAPIRequest("viewCart", "POST", data);
+    if (response && response.status == 200) {
+      // console.log("Cart Items", response.data);
+      yield put(viewCartItemsSucess(response.data));
+      yield put(orderAPIFetching(false));
+    } else {
+      yield put(viewCartItemsError(response));
+      yield put(orderAPIFetching(false));
+    }
   }
 }
 
@@ -64,11 +69,13 @@ export function* updateOrder() {
 
 export function* removeProductFromCart(actionObj) {
   const productId = actionObj && actionObj.data;
+
   try {
     yield put(updateFetchingProductId(productId));
-    const response = yield triggerAPIRequest("removeCartItem", "POST",
-      { customerPh: "+919633882121", productId }
-    );
+    const response = yield triggerAPIRequest("removeCartItem", "POST", {
+      customerPh: "+919633882121",
+      productId
+    });
     if (response && response.status == 200) {
       yield put(viewCartItemsSucess(response.data));
       yield put(updateFetchingProductId(""));

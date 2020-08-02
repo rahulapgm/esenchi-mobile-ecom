@@ -8,6 +8,8 @@ import { getCategoryList } from "../../CategoryDrawer/actions";
 import { makeSelectCategoryList } from "../../CategoryDrawer/selectors";
 import toJS from '../../../hoc/toJS/toJS';
 
+import { getUserAddress } from "../ChangeAddress/actions";
+
 class HomePage extends React.Component {
   constructor(props) {
     super(props);
@@ -15,6 +17,7 @@ class HomePage extends React.Component {
 
   componentDidMount() {
     this.props.fetchCategoryList();
+    this.props.getUserAddress();
   }
   render() {
     return <HomePageComponent {...this.props} />;
@@ -23,7 +26,8 @@ class HomePage extends React.Component {
 
 const mapDispatchToProps = dispatch => {
   return {
-    fetchCategoryList: () => dispatch(getCategoryList())
+    fetchCategoryList: () => dispatch(getCategoryList()),
+    getUserAddress: () => dispatch(getUserAddress())
   };
 };
 const mapStateToProps = createStructuredSelector({});

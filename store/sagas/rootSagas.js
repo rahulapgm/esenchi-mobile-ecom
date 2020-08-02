@@ -8,6 +8,7 @@ import categoryDrawerSagas from '../../main/containers/CategoryDrawer/sagas';
 import productListingSagas from '../../main/containers/ProductListing/sagas';
 import productSagas from '../../main/containers/ProductListing/Product/sagas';
 import productSearchSagas from '../../main/containers/ProductSearch/ProductSearchV2/sagas';
+import userAddressSagas from '../../main/containers/Pages/ChangeAddress/sagas';
 
 export const runSagas = (sagas) => {
 	if (Array.isArray(sagas)) {
@@ -28,7 +29,8 @@ export const allSagas = () => [
 	...runSagas(categoryDrawerSagas),
 	...runSagas(productListingSagas),
 	...runSagas(productSagas),
-	...runSagas(productSearchSagas)
+	...runSagas(productSearchSagas),
+	...runSagas(userAddressSagas)
 ];
 
 export default function* rootSaga() {
