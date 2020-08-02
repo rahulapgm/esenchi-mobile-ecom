@@ -60,8 +60,8 @@ export const Checkout = props => {
             borderRadius: 5
           }}
         >
-          <Text style={{ color: "#0046FF", fontWeight: "bold" }}>Total Amount: </Text>
-          {` ₹ ${cartTotalAmount} `}
+          <Text style={{ color: "#0046FF", fontWeight: "bold" }}>Total Amount:</Text>
+          {` Rs.${cartTotalAmount} `}
         </Text>
         <Button
           onPress={() => {

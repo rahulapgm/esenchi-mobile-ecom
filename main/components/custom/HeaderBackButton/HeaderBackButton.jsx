@@ -13,11 +13,10 @@ export const HeaderBackButton = ({ navigation, targetPage = "App", onBackBtnPres
       style={{
         color: "#0099ff",
         backgroundColor: "white",
-        fontSize: 20,
-        paddingHorizontal: 26
+        paddingHorizontal: 24
       }}
     >
-      <MaterialCommunityIcons name="arrow-left-bold-circle" size={32} />
+      <MaterialCommunityIcons name="arrow-left-bold-circle" size={26} />
     </TouchableOpacity>
   );
 };

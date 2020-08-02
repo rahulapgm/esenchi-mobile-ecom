@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
 import { compose } from "redux";
 
-import ProductComponent from '../../../components/ProductList/Product/Product';
+import ProductComponent from '../../../components/ProductList/Product/ProductV2/ProductV2';
 import toJS from '../../../hoc/toJS/toJS';
 
 import {addProductToCart} from './actions';

@@ -11,12 +11,10 @@ import {
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
 import { compose } from "redux";
+
 import Product from "./Product/Product";
 
-import {
-  getProductsListOnCategory,
-  clearProductsFromStore
-} from "./actions";
+import { getProductsListOnCategory, clearProductsFromStore } from "./actions";
 
 import {
   makeSelectProductList,
@@ -26,7 +24,7 @@ import {
 
 import SkeletonComponent from "../../components/custom/Skeleton/Skeleton";
 
-import toJS from '../../hoc/toJS/toJS'
+import toJS from "../../hoc/toJS/toJS";
 
 export class ProductListing extends React.PureComponent {
   constructor(props) {
@@ -56,6 +54,7 @@ export class ProductListing extends React.PureComponent {
       this.props.clearProductsFetched();
     });
   }
+
   _handleLoadMore = () => {
     console.log("loading content");
     if (!this.props.isAllDocumentLoaded) {
@@ -92,20 +91,34 @@ export class ProductListing extends React.PureComponent {
   };
 
   render() {
-    if (!this.props.productList.length) {
+    if (!this.props.productList.length && this.props.showProductListLoader) {
       return <SkeletonComponent text={"Thank You for Using eSenchi.."} />;
     }
+
+    else if (!this.props.productList.length && !this.props.showProductListLoader) {
+      return (
+        <View style={{paddingVertical:24}}>
+          <Text style={{textAlign:"center"}}>
+            Uff! No product available for '{this.subCategoryItem}', Sorry..
+          </Text>
+        </View>
+      );
+    }
+
     return (
       <React.Fragment>
         <SafeAreaView style={styles.container}>
           <FlatList
             data={this.props.productList}
             renderItem={({ item, index }) => (
-              <Product key={item.productId} product={item} {...this.props} />
+              <Product product={item} {...this.props} />
             )}
             keyExtractor={item => item.productId}
             onEndReached={() => {
-              if (!this.props.showProductListLoader && this.props.productList.length > 6) {
+              if (
+                !this.props.showProductListLoader &&
+                this.props.productList.length > 6
+              ) {
                 this._handleLoadMore();
               }
             }}
@@ -120,7 +133,8 @@ export class ProductListing extends React.PureComponent {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1
+    flex: 1,
+    flexDirection: "column"
   }
 });
 

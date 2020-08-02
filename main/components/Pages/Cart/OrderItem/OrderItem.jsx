@@ -19,15 +19,6 @@ export const OrderItem = props => {
 
   const { updatingProductId = "" } = props;
 
-  // if(updatingProductId === productId){
-  //   return (
-  //     <ShadowBox style={{ flexDirection: "row", padding: 6, flex: 1 }}>
-  //       <Text>
-  //         Loading..
-  //       </Text>
-  //     </ShadowBox>
-  //   );
-  // }
   const {
     pricingArrayList = [],
     alertOnRemove = () => {},
@@ -132,7 +123,7 @@ export const OrderItem = props => {
               }}
             >
               <Text style={{ color: "blue" }}>
-                Selling Price: {sellingPrice} Rs. {"  "}
+                {`Selling Price: ${sellingPrice} Rs. `}
                 <Text
                   style={{
                     color: "grey",
@@ -166,6 +157,7 @@ export const OrderItem = props => {
                 optionsList={pricingArrayList}
                 currentOption={currentSelectedSku}
                 callbackForUpdate={updateQuantity}
+                productName={productName}
               />
             </View>
           </View>

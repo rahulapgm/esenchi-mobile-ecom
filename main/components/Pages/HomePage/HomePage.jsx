@@ -11,7 +11,6 @@ import {
 import { MaterialCommunityIcons } from "react-native-vector-icons";
 
 import ProductCategoryTiles from "../../../containers/Pages/HomePage/ProductCategoryTiles";
-import PLP from "../../../containers/PLP";
 import ProductSearch from "../../../containers/ProductSearch/ProductSearchV2/ProductSearchV2";
 import Banner from "../../common/Banner/Banner";
 import Brand from "../../common/Brand/Brand";
@@ -41,7 +40,7 @@ export class HomePage extends React.Component {
           brandViewStyle={styles.brandViewStyle}
         />
         <View style={{ flex: 0.5 }}>
-          <ProductSearch />
+          <ProductSearch {...this.props}/>
         </View>
 
         <TouchableOpacity
@@ -68,7 +67,6 @@ export class HomePage extends React.Component {
             <ProductCategoryTiles />
             <Banner title="Min. order amount is 50Rs. Free delivery for orders above 100Rs." />
             <Banner title="Flat 10% off on online payment purchases." />
-            <PLP />
           </ScrollView>
         </SafeAreaView>
       </React.Fragment>

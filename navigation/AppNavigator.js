@@ -7,6 +7,7 @@ import AuthManager from "../screens/AuthManger";
 import OTPVerificationScreen from "../screens/OTPVerificationScreen";
 import SignInScreen from "../screens/SignInScreen";
 import CheckoutScreen from "../screens/CheckoutScreen";
+import ManageAddressScreen from "../screens/ManageAddressScreen";
 
 import CategoryListingScreen from "../screens/CategoryListingScreen";
 
@@ -20,7 +21,8 @@ const AppNavigator = createCompatNavigatorFactory(createStackNavigator)(
     App: { screen: BottamTabNavigator },
     OTPVerifyScreen: { screen: OTPVerificationScreen },
 		Checkout: { screen: CheckoutScreen },
-		ProductListing: { screen: CategoryListingScreen }
+    ProductListing: { screen: CategoryListingScreen },
+    ChangeAddress: { screen: ManageAddressScreen }
   },
   {
     initialRouteName: "AuthManager",

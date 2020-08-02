@@ -2,26 +2,25 @@ import React, { useState } from "react";
 import { Text, View, Image, TouchableOpacity } from "react-native";
 // import Button from "../../custom/Button/Button";
 
-import { styles } from "./productStyles";
-import Dropdown from "../../custom/Dropdown";
+import { styles } from "./ProductV2Styles";
+import Dropdown from "../../../custom/Dropdown";
 
 const Product = props => {
   const { product, addToCart } = props;
   const {
     productId,
     productName,
-    productMalayalamName,
+    productMalayalamName="",
     productCategory,
     pricingDetails = {},
-    selectedPricingSkuIndex = 0,
+    selectedPricingSkuIndex = "",
     productAvailability,
     productImgUrl,
   } = product;
 
   const selectedSku = pricingDetails[selectedPricingSkuIndex];
-  const [currentSelectedSku, setCurrentSelectedSku] = useState(
-    Object(selectedSku)
-  );
+  const [currentSelectedSku, setCurrentSelectedSku] = useState(selectedSku);
+
 
 
   // console.log("*******************************************************\n");
@@ -40,31 +39,34 @@ const Product = props => {
   return productAvailability && Object.entries(pricingDetails).length > 0 ? (
     <View style={styles.container}>
       <View style={styles.imgSection}>
+        <Text style={styles.discountStyle}>
+          Save {currentSelectedSku.discount} Rs.
+        </Text>
         <Image
           style={styles.image}
           source={{
             uri: productImgUrl
           }}
         />
-        <Text style={styles.discountStyle}>
-          Save {currentSelectedSku.discount} Rs.
-        </Text>
       </View>
       <View style={styles.prdDescriptionSec}>
-        <Text style={styles.prdNameText}>{productName} ({productMalayalamName})</Text>
+        <View style={{flexDirection:"row", width:"100%"}}>
+          <Text style={styles.prdNameText}>{productName} ({productMalayalamName})</Text>
 
-        <Text style={styles.price}>
-          <Text style={styles.strikedPrice}>
-            {currentSelectedSku.mrpRate} Rs.
-          </Text>{" "}
-          {currentSelectedSku.sellingPrice} Rs.
-        </Text>
+          <Text style={styles.price}>
+            <Text style={styles.strikedPrice}>
+              {currentSelectedSku.mrpRate} Rs.
+            </Text>{" "}
+            {currentSelectedSku.sellingPrice} Rs.
+          </Text>
+        </View>
 
         <View style={styles.dropdownStyle}>
           <Dropdown
             optionsList={Object.values(pricingDetails)}
             currentOption={currentSelectedSku}
             callbackForUpdate={setCurrentSelectedSku}
+            productName={`${productName}(${productMalayalamName})`}
           />
         </View>
 
@@ -77,7 +79,11 @@ const Product = props => {
           </Text>
         </Text> */}
 
-        <TouchableOpacity onPress={()=>{addToCart({productId, selectedPricingSkuIndex, productName})}} style={styles.addToCartBtn}>
+        <TouchableOpacity
+          onPress={()=> {
+            addToCart({productId, selectedPricingSkuIndex:currentSelectedSku.skuIndex, productName})
+          }}
+          style={styles.addToCartBtn}>
           <Text style={styles.addToCartBtnText}>ADD TO CART</Text>
         </TouchableOpacity>
       </View>

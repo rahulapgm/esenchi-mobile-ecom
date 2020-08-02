@@ -9,6 +9,7 @@ import {
 } from "./constants";
 
 import triggerAPIRequest from "../../utils/apiUtils";
+import { showToastMsg } from "../../hoc/Toast/actions";
 
 export function* fetchProductsOnCategory(actionObj) {
 
@@ -23,14 +24,15 @@ export function* fetchProductsOnCategory(actionObj) {
     );
     if (response && response.status == 200) {
       const {docs = [], isAllDocumentLoaded} = response.data;
-      console.log("isAllDocumentLoaded -> ",isAllDocumentLoaded);
       yield put(setProductsListOnCategory({docs, isAllDocumentLoaded}));
       yield put(showProductListLoader(false));
     } else {
+      yield put(showToastMsg({toastMsg:`No Products Available`}))
       yield put(fetchErrorOnProductCategory(response));
       yield put(showProductListLoader(false));
     }
   } catch (e) {
+    yield put(showToastMsg({toastMsg:`No Products Available`}))
     yield put(fetchErrorOnProductCategory(e));
     yield put(showProductListLoader(false));
   }

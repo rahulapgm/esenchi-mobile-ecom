@@ -1,5 +1,7 @@
 import * as React from "react";
 import { Provider } from "react-redux";
+import { DefaultTheme, Provider as PaperProvider } from 'react-native-paper';
+
 import {
   Platform,
   StatusBar,
@@ -22,6 +24,8 @@ import { navigationRef } from "./RootNavigation";
 
 import { SafeAreaProvider } from "react-native-safe-area-context";
 
+import Toast from './main/hoc/Toast/Toast';
+
 const Stack = createStackNavigator();
 
 const DismissKeyBoard = ({ children }) => (
@@ -35,6 +39,17 @@ export default function App(props) {
   const [initialNavigationState, setInitialNavigationState] = React.useState();
   const containerRef = React.useRef();
   const { getInitialState } = useLinking(containerRef);
+
+
+  const theme = {
+    ...DefaultTheme,
+    roundness: 2,
+    colors: {
+      ...DefaultTheme.colors,
+      primary: '#304FFE',
+      accent: '#021aee',
+    },
+  };
 
   // Load any resources or data that we need prior to rendering the app
   React.useEffect(() => {
@@ -74,20 +89,23 @@ export default function App(props) {
         <Provider store={configureStore()}>
           <DismissKeyBoard>
             <SafeAreaProvider>
-              <NavigationContainer
-                ref={navigationRef}
-                initialState={initialNavigationState}
-              >
-                <Stack.Navigator>
-                  <Stack.Screen
-                    name="Home"
-                    options={{
-                      headerShown: false
-                    }}
-                    component={AppNavigator}
-                  />
-                </Stack.Navigator>
-              </NavigationContainer>
+              <PaperProvider theme={theme}>
+                <NavigationContainer
+                  ref={navigationRef}
+                  initialState={initialNavigationState}
+                >
+                  <Stack.Navigator>
+                    <Stack.Screen
+                      name="Home"
+                      options={{
+                        headerShown: false
+                      }}
+                      component={AppNavigator}
+                    />
+                  </Stack.Navigator>
+                </NavigationContainer>
+                <Toast />
+              </PaperProvider>
             </SafeAreaProvider>
           </DismissKeyBoard>
         </Provider>

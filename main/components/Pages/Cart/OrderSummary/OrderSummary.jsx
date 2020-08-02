@@ -8,7 +8,8 @@ import styles from "./styles";
 export const OrderSummary = ({
   cartTotalAmount,
   cartTotalSavings,
-  cartTotalMRPRate
+  cartTotalMRPRate,
+  navigation
 }) => {
   return (
     <ShadowBox style={styles.container}>
@@ -33,7 +34,7 @@ export const OrderSummary = ({
       </Text>
       <TouchableOpacity
         onPress={() => {
-          this.props.navigation.navigate("ChangeAddress");
+          navigation.navigate("ChangeAddress");
         }}
       >
         <Text style={styles.changeAddress}>Change Address</Text>
