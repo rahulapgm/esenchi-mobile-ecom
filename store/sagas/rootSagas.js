@@ -3,6 +3,10 @@ import isFunction from "lodash/fp/isFunction";
 
 import userAuthSagas from "../../main/containers/Pages/UserAuth/sagas";
 import productListSagas from "../../main/containers/PLP/sagas";
+import cartSagas from '../../main/containers/Pages/Cart/sagas';
+import orderItemSagas from '../../main/containers/Pages/Cart/OrderItem/sagas';
+import categoryDrawerSagas from '../../main/containers/CategoryDrawer/sagas';
+import productListingSagas from '../../main/containers/ProductListing/sagas';
 
 export const runSagas = (sagas) => {
 	if (Array.isArray(sagas)) {
@@ -19,6 +23,10 @@ export const runSagas = (sagas) => {
 export const allSagas = () => [
 	...runSagas(userAuthSagas),
 	...runSagas(productListSagas),
+	...runSagas(cartSagas),
+	...runSagas(orderItemSagas),
+	...runSagas(categoryDrawerSagas),
+	...runSagas(productListingSagas)
 ];
 
 export default function* rootSaga() {

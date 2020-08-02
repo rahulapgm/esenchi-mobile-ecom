@@ -43,7 +43,6 @@ export function* authenticateUser(userData) {
 		}
 	} catch (err) {
 		yield put(isFetchingOTP(false));
-		console.log("verify Err", err);
 		yield put(verifyLoginErr(err));
 	}
 }
@@ -67,10 +66,8 @@ export function* invokeOTPValidation(userData) {
 		} else {
 			yield put(isFetchingOTP(false));
 			yield put(validateOTPErr(true));
-			console.log("message=> loginUser 2", response);
 		}
 	} catch (err) {
-		console.log(err);
 		yield put(validateOTPErr(err));
 	}
 }

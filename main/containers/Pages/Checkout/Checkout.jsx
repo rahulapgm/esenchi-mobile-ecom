@@ -1,18 +1,28 @@
-import React, {PureComponent} from "react";
+import React from "react";
+import { connect } from "react-redux";
+import { compose } from "redux";
+import { createStructuredSelector } from "reselect";
+import CheckoutComponent from "../../../components/Pages/Checkout/Checkout";
+import { makeSelectCartItems, makeSelectOrderApiFetching, makeSelectOrderAPIStatus } from "../Cart/selectors";
+import toJS from "../../../hoc/toJS/toJS";
 
-import {View, Text} from "react-native";
+export const Checkout = props => {
+  return <CheckoutComponent {...props} />;
+};
 
-export class Checkout extends PureComponent {
-	constructor(props) {
-		super(props);
-	}
-	render() {
-		return (
-			<View>
-				<Text>Welcome to Checkout!!</Text>
-			</View>
-		);
-	}
-}
+const mapStateToProps = createStructuredSelector({
+  cartDetailsObj: makeSelectCartItems(),
+  isOrderApiFetching: makeSelectOrderApiFetching(),
+  currentOrderAPIStatus: makeSelectOrderAPIStatus(),
+});
 
-export default Checkout;
+const mapDispatchToProps = dispatch => {
+  return {};
+};
+
+const withConnect = connect(
+  mapStateToProps,
+  mapDispatchToProps
+);
+
+export default compose(withConnect)(toJS(Checkout));

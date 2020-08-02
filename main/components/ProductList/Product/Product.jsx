@@ -1,110 +1,88 @@
 import React, { useState } from "react";
-import {
-  Text,
-  View,
-  StyleSheet,
-  AppRegistry,
-  Image,
-  TouchableOpacity,
-  Picker,
-} from "react-native";
+import { Text, View, Image, TouchableOpacity } from "react-native";
 // import Button from "../../custom/Button/Button";
 
 import { styles } from "./productStyles";
 import Dropdown from "../../custom/Dropdown";
 
-
-
-
-const Product = (props) => {
-  const { product } = props;
+const Product = props => {
+  const { product, addToCart } = props;
   const {
     productId,
     productName,
+    productMalayalamName,
     productCategory,
-    pricingDetails = [],
+    pricingDetails = {},
     selectedPricingSkuIndex = 0,
     productAvailability,
-    productImgUrl
+    productImgUrl,
   } = product;
+
+  const selectedSku = pricingDetails[selectedPricingSkuIndex];
+  const [currentSelectedSku, setCurrentSelectedSku] = useState(
+    Object(selectedSku)
+  );
+
 
   // console.log("*******************************************************\n");
   // console.log("selectedSkuIndex: ", selectedPricingSkuIndex);
-  // console.log("pricingDetails[selectedPricingSkuIndex]: ", pricingDetails[selectedPricingSkuIndex]);
+  // console.log("currentSelectedSku: ", currentSelectedSku);
   // console.log("*******************************************************\n")
-
-  const selectedSku = pricingDetails[selectedPricingSkuIndex];
-  const [currentSelectedSku, setCurrentSelectedSku] = useState(selectedSku);
 
   const cartPushingProductObj = {
     productId,
     productName,
+    productMalayalamName,
     productCategory,
-    selectedSku: currentSelectedSku,
-  }
+    selectedSku: currentSelectedSku
+  };
 
-  console.log("*******************************************************\n");
-  console.log("cartPushingProductObj", cartPushingProductObj);
-  console.log("*******************************************************\n");
-
-  return (
-    productAvailability && pricingDetails.length > 0 ?
-      (
-        <View style={styles.container}>
-          <View style={styles.imgSection}>
-
-            <Image
-              style={styles.image}
-              source={{
-                uri: productImgUrl,
-              }}
-            />
-            <Text style={styles.discountStyle}>
-              Save {currentSelectedSku.discount} Rs.
+  return productAvailability && Object.entries(pricingDetails).length > 0 ? (
+    <View style={styles.container}>
+      <View style={styles.imgSection}>
+        <Image
+          style={styles.image}
+          source={{
+            uri: productImgUrl
+          }}
+        />
+        <Text style={styles.discountStyle}>
+          Save {currentSelectedSku.discount} Rs.
         </Text>
-          </View>
-          <View style={styles.prdDescriptionSec}>
+      </View>
+      <View style={styles.prdDescriptionSec}>
+        <Text style={styles.prdNameText}>{productName} ({productMalayalamName})</Text>
 
-            <Text style={styles.prdNameText}>{productName}</Text>
+        <Text style={styles.price}>
+          <Text style={styles.strikedPrice}>
+            {currentSelectedSku.mrpRate} Rs.
+          </Text>{" "}
+          {currentSelectedSku.sellingPrice} Rs.
+        </Text>
 
-            <Text style={styles.price}>
-              <Text
-                style={styles.strikedPrice}>
-                {currentSelectedSku.mrpRate} Rs.
+        <View style={styles.dropdownStyle}>
+          <Dropdown
+            optionsList={Object.values(pricingDetails)}
+            currentOption={currentSelectedSku}
+            callbackForUpdate={setCurrentSelectedSku}
+          />
+        </View>
+
+        {/* <Text style={styles.deliveryMsgText}>
+          Est Delivery before
+          <Text
+            style={{ fontWeight: "bold", fontStyle: "normal", color: "green" }}
+          >
+            Tomorrow 6 P.M
           </Text>
-              {" "} {currentSelectedSku.sellingPrice} Rs.
-        </Text>
+        </Text> */}
 
-
-            <View
-              style={styles.dropdownStyle}>
-              <Dropdown
-                optionsList={pricingDetails}
-                currentOption={currentSelectedSku}
-                callbackForUpdate={setCurrentSelectedSku} />
-            </View>
-
-
-            <Text style={styles.deliveryMsgText}>
-              Est Delivery before
-            <Text style={{ fontWeight: "bold", fontStyle: "normal", color: "green" }}>
-                Tomorrow 6 P.M
-              </Text>
-            </Text>
-
-
-            <TouchableOpacity
-              style={styles.addToCartBtn}>
-              <Text
-                style={styles.addToCartBtnText}>
-                ADD TO CART
-						</Text>
-            </TouchableOpacity>
-
-          </View>
-        </View >
-      ) : null
-  );
+        <TouchableOpacity onPress={()=>{addToCart({productId, selectedPricingSkuIndex})}} style={styles.addToCartBtn}>
+          <Text style={styles.addToCartBtnText}>ADD TO CART</Text>
+        </TouchableOpacity>
+      </View>
+    </View>
+  ) : null;
 };
 
 export default Product;

@@ -23,6 +23,7 @@ export const CartScreen = ({navigation}) => {
 				options={{
 					headerTitle: "C A R T",
 					headerTitleAlign: "center",
+					headerLeft: null
 				}}
 			/>
 			{

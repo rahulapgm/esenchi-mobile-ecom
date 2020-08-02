@@ -1,1 +1,1 @@
-export {default} from "./Cart.jsx";
+export { default } from "./Cart.jsx";
