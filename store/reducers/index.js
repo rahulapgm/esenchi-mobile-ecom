@@ -5,6 +5,7 @@ import { categoryDrawerReducers as categoryDrawer } from "../../main/containers/
 import { productListReducers as searchResults } from "../../main/containers/ProductListing/reducers";
 import { toastReducers as toast } from "../../main/hoc/Toast/reducer";
 import { productSearchReducers as productSearch } from "../../main/containers/ProductSearch/ProductSearchV2/reducers";
+import { productCartReducer } from "../../main/containers/ProductListing/Product/reducers";
 
 export default combineReducers({
   loginReducer,
@@ -12,5 +13,6 @@ export default combineReducers({
   categoryDrawer,
   searchResults,
   toast,
-  productSearch
+  productSearch,
+  productCart: productCartReducer
 });

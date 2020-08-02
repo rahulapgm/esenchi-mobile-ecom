@@ -1,2 +1,3 @@
+export const BASE = "BASE";
 export const ADD_PRODUCT_TO_CART = "ADD_PRODUCT_TO_CART";
 export const IS_UPDATING_PRODUCT_ITEM = "IS_UPDATING_PRODUCT_ITEM";

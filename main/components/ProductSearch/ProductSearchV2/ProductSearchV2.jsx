@@ -4,7 +4,7 @@ import { Image, StyleSheet, TouchableOpacity, Text } from "react-native";
 
 import SearchModal from "./SearchModal/SearchModal";
 
-const ProductSearch = ({fetchSearchSuggestion, searchSuggestion, navigation}) => {
+const ProductSearch = ({ fetchSearchSuggestion, searchSuggestion, navigation }) => {
   const [modalVisible, setModalVisible] = useState(false);
   const [searchQuery, setSearchQuery] = React.useState("");
   const onChangeSearch = query => setSearchQuery(query);
@@ -26,7 +26,7 @@ const ProductSearch = ({fetchSearchSuggestion, searchSuggestion, navigation}) =>
         }}
       >
         <Text
-          style={{ flex: 1, padding: 6, fontSize: 13 }}
+          style={{ flex: 1, padding: 8, fontSize: 13 }}
         >
           Search for products
         </Text>
@@ -36,8 +36,8 @@ const ProductSearch = ({fetchSearchSuggestion, searchSuggestion, navigation}) =>
             width: 36,
             resizeMode: "center",
             backgroundColor: "#f5f5f5",
-            borderTopRightRadius: 8,
-            borderBottomRightRadius: 8
+            borderTopRightRadius: 2,
+            borderBottomRightRadius: 2
           }}
           source={require("../../../../assets/icons/search-icon-11.png")}
         />
@@ -49,7 +49,7 @@ const ProductSearch = ({fetchSearchSuggestion, searchSuggestion, navigation}) =>
 const searchStyle = StyleSheet.create({
   searchContainer: {
     alignContent: "center",
-    borderRadius: 8,
+    borderRadius: 2,
     flexDirection: "row",
     backgroundColor: "white",
     alignItems: "center",
@@ -57,7 +57,8 @@ const searchStyle = StyleSheet.create({
     shadowOffset: { width: 3, height: 3 },
     shadowOpacity: 1.0,
     elevation: 20,
-    height: 40
+    height: 40,
+    margin: 15,
   },
   ImageStyle: {
     backgroundColor: "#FAFAFA",
