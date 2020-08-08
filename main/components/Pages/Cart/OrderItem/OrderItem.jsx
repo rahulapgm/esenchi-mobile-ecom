@@ -148,7 +148,7 @@ export const OrderItem = props => {
             <Text>Quantity:</Text>
             <View
               style={{
-                flex: 0.88,
+                flex: 1,
                 paddingHorizontal: 6,
                 alignItems: "center"
               }}

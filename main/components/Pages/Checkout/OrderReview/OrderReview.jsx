@@ -26,7 +26,7 @@ export const OrderReview = props => {
         <Heading type="h2">ORDER DETAILS</Heading>
 
         <Subheading style={{ fontWeight: "700" }}>Order Items</Subheading>
-        <View style={styles.orderItems}>
+        <ShadowBox style={styles.orderItems}>
           {productItems.map((obj, index) => {
             const {
               productName,
@@ -57,7 +57,7 @@ export const OrderReview = props => {
               </View>
             );
           })}
-        </View>
+        </ShadowBox>
 
         <Subheading style={{ fontWeight: "700" }}>Delivery Address</Subheading>
         <ShadowBox>

@@ -3,13 +3,15 @@ import { put, takeLatest, delay, select } from "redux-saga/effects";
 import {
   VIEW_CART_ITEMS,
   UPDATE_CURRENT_ORDER,
-  REMOVE_CART_ITEM
+  REMOVE_CART_ITEM,
+  GET_PAYMENT_METHODS
 } from "./constants";
 import {
   viewCartItemsSucess,
   viewCartItemsError,
   orderAPIFetching,
-  updateOrderAPIStatus
+  updateOrderAPIStatus,
+  setPaymentMethods
 } from "./actions";
 
 import { updateFetchingProductId } from "./OrderItem/actions";
@@ -25,10 +27,10 @@ export function* fetchUserCartItems() {
     yield put(orderAPIFetching(true));
     const response = yield triggerAPIRequest("viewCart", "POST", data);
     if (response && response.status == 200) {
-      // console.log("Cart Items", response.data);
       yield put(viewCartItemsSucess(response.data));
       yield put(orderAPIFetching(false));
     } else {
+      console.log(response.status);
       yield put(viewCartItemsError(response));
       yield put(orderAPIFetching(false));
     }
@@ -94,10 +96,32 @@ export function* removeProductFromCart(actionObj) {
   }
 }
 
+export function* getAllPaymentMethods(){
+
+  const fallbackPaymentMethods = [
+    { type: "UPI", icon: "contactless-payment", selected: true },
+    { type: "Google Pay", icon: "google", selected: false },
+    { type: "Credit/Debit/ATM Card", icon: "credit-card", selected: false },
+  ];
+
+  try {
+    const response = yield triggerAPIRequest("getPaymentMethods");
+    if (response && response.status == 200) {
+      const paymentMethods  = response.data;
+      yield put(setPaymentMethods(paymentMethods));
+    } else {
+      yield put(setPaymentMethods(fallbackPaymentMethods));
+    }
+  } catch (e) {
+    yield put(setPaymentMethods(fallbackPaymentMethods));
+  }
+}
+
 export function* watchForListRequest() {
   yield takeLatest(VIEW_CART_ITEMS, fetchUserCartItems);
   yield takeLatest(UPDATE_CURRENT_ORDER, updateOrder);
   yield takeLatest(REMOVE_CART_ITEM, removeProductFromCart);
+  yield takeLatest(GET_PAYMENT_METHODS, getAllPaymentMethods);
 }
 
 export default [watchForListRequest];

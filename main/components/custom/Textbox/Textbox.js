@@ -1,6 +1,4 @@
 import React, { useState } from "react";
-import PropTypes from "prop-types";
-import { LinearGradient } from "expo";
 import { View, TextInput } from "react-native";
 
 const Textbox = props => {

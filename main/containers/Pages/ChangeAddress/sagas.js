@@ -15,15 +15,15 @@ export function* getAddress() {
         userPincode = "",
         userAddress = "",
         userGeoPoint = [],
-        userLandMark = ""
+        userLandMark = "",
+        userName
       } = response.data;
       yield put(
-        setAddress({ userAddress, userLandMark, userGeoPoint, userPincode })
+        setAddress({userName, userAddress, userLandMark, userGeoPoint, userPincode })
       );
     }
   } catch (e) {
     yield put(showToastMsg({ toastMsg: "Address Fetch Failed" }));
-    console.log(e);
   }
 }
 
@@ -32,34 +32,40 @@ export function* updateAddress(actionObj) {
 
   try {
     yield put(setIsUpdating(true));
-    const { addressObj = {}, geoPoint = {}, userLandMark = "" } = data;
+    const { addressObj = {}, geoPoint = {} } = data;
     const userGeoPoint = [];
     userGeoPoint.push(geoPoint);
 
-    const userAddress = `${addressObj.HouseName}, ${addressObj.userLandMark}, ${addressObj.street}, ${addressObj.panchayath}, ${addressObj.pinCode}`;
+    const userAddress = `${addressObj.houseName}, ${addressObj.userLandMark}, ${addressObj.street}, ${addressObj.panchayath}, ${addressObj.pinCode}`;
+
+    const {userName, userLandMark, pinCode} = addressObj;
 
     const postData = {
+      userName,
       userAddress,
-      userLandMark,
       userGeoPoint,
-      userPincode: addressObj.pinCode
+      userLandMark,
+      userPincode: pinCode
     };
 
     const response = yield triggerAPIRequest("saveAddress", "POST", postData);
-    console.log(response);
 
     if (response && response.status == 200) {
-      yield put(showToastMsg({ toastMsg: "Address Saved!" }));
+
+      const { userName } = response.data;
+
       yield put(
         setAddress({
+          userName,
           userAddress,
           userLandMark,
           userGeoPoint,
           userPincode: addressObj.pinCode
         })
       );
-      yield delay(500);
-      yield RootNavigation.navigate("App", { screen: "CartTab" });
+
+      yield put(showToastMsg({ toastMsg: "Address Saved!" }));
+      yield RootNavigation.navigate("App", {screen: "Home"});
     } else {
       yield put(showToastMsg({ toastMsg: "Address Saved Failed!" }));
     }
@@ -68,7 +74,6 @@ export function* updateAddress(actionObj) {
   } catch (e) {
     yield put(setIsUpdating(false));
     yield put(showToastMsg({ toastMsg: "Address Saved Failed!" }));
-    console.log(e);
   }
 }
 

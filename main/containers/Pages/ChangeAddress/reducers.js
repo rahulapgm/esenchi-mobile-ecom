@@ -20,6 +20,7 @@ export const addressReducers = (
         .set("userGeoPoint", data.userGeoPoint)
         .set("userLandMark", data.userLandMark)
         .set("userPincode", data.userPincode)
+        .set("userName", data.userName)
 
     case IS_UPDATING:
       return state.set('isUpdating', data);

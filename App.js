@@ -25,6 +25,7 @@ import { navigationRef } from "./RootNavigation";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 
 import Toast from './main/hoc/Toast/Toast';
+import Loader from './main/hoc/Loader/Loader';
 
 const Stack = createStackNavigator();
 
@@ -105,13 +106,14 @@ export default function App(props) {
                   </Stack.Navigator>
                 </NavigationContainer>
                 <Toast />
+                <Loader />
               </PaperProvider>
             </SafeAreaProvider>
           </DismissKeyBoard>
         </Provider>
       </View>
     );
-  }
+                    }
 }
 
 const styles = StyleSheet.create({

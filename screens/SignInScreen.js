@@ -1,18 +1,9 @@
-import React, { Suspense, lazy } from "react";
-import { View, Button, ImageBackground } from "react-native";
-const UserAuthComponent = lazy(() =>
-  import("../main/containers/Pages/UserAuth/UserAuth")
-);
+import React from "react";
+import UserAuthComponent from "../main/containers/Pages/UserAuth/UserAuth";
 
 export class SignInScreen extends React.Component {
   render() {
-    return (
-      <React.Fragment>
-        <Suspense fallback={<View></View>}>
-          <UserAuthComponent {...this.props}/>
-        </Suspense>
-      </React.Fragment>
-    );
+    return <UserAuthComponent {...this.props} />;
   }
 
   _signInAsync = async () => {

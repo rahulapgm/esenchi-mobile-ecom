@@ -13,8 +13,6 @@ export function* getAllCategories() {
   if (response && response.status == 200) {
     const { categories } = response.data;
     yield put(setCategoryList(categories));
-  } else if (response.data) {
-    console.log("categories not found");
   }
 }
 export function* watchForListRequest() {

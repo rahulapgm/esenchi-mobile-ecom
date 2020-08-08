@@ -4,7 +4,8 @@ import {
   VIEW_CART_ITEMS_SUCCESS,
   VIEW_CART_ITEM_ERROR,
   ORDER_API_FETCHING,
-  UPDATE_ORDER_API_STATUS
+  UPDATE_ORDER_API_STATUS,
+  SET_PAYMENT_METHODS
 } from "./constants";
 
 import { UPDATE_FETCHING_PRODUCT_ID } from "./OrderItem/constants";
@@ -26,6 +27,8 @@ export const cartReducers = (state = initialState, { type, data, error }) => {
       return state.set("orderAPIStatus", data);
     case UPDATE_FETCHING_PRODUCT_ID:
       return state.set("productIdUpdating", data);
+    case SET_PAYMENT_METHODS:
+      return state.set("paymentMethods", data);
     default:
       return state;
   }

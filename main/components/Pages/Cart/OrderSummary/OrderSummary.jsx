@@ -11,7 +11,8 @@ export const OrderSummary = ({
   cartTotalSavings,
   cartTotalMRPRate,
   navigation,
-  userAddress=""
+  userAddress="",
+  getUserAddress
 }) => {
   return (
     <ShadowBox style={styles.container}>
@@ -36,7 +37,8 @@ export const OrderSummary = ({
       </Paragraph>
       <TouchableOpacity
         onPress={() => {
-          navigation.navigate("ChangeAddress");
+          getUserAddress();
+          navigation.navigate("ChangeAddress", {screen: "ChangeAddress", params:{ targetPage:"CartTab" } });
         }}
       >
         <Paragraph style={styles.changeAddress}>Change Address</Paragraph>

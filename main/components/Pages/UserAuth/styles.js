@@ -1,20 +1,23 @@
 import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
+  safeArea: {
+    flex: 1,
+    backgroundColor: "white"
+  },
   container: {
     flex: 1,
     flexDirection: "column",
     alignItems: "center",
-    height: "100%",
-    width: "100%"
+    backgroundColor: "white",
+    top: 24
   },
-  userInputs: { marginTop: 24, flexDirection: "column", flex: 1 },
+  userInputs: { marginTop: 32, flexDirection: "column", flex: 1 },
   inputItem: {
     marginTop: 18
   },
   welcomeMsg: {
     color: "black",
-    fontFamily: "FredokaOne-Regular",
     textAlign: "center",
     fontSize: 16
   },
@@ -35,11 +38,9 @@ export const styles = StyleSheet.create({
     alignItems: "center"
   },
   gradient: {
-    marginTop: 6,
     width: "100%"
   },
   buttonText: {
-    color: "white",
     fontSize: 16,
     textAlign: "center",
     padding: 8

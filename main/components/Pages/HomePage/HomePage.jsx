@@ -58,7 +58,7 @@ export class HomePage extends React.Component {
   render() {
     return (
       <React.Fragment>
-        <SafeAreaView>
+        <SafeAreaView style={{backgroundColor:"#fafafa"}}>
           {this.renderHeader()}
           <View>
             <ProductSearch {...this.props} />

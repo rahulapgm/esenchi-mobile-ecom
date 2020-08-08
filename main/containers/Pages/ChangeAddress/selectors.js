@@ -27,3 +27,9 @@ export const selectIsUpdating = () =>
     MakeSelectUserAddressDetails,
     state => state.get("isUpdating")
   );
+
+export const selectUserName = () =>
+  createSelector(
+    MakeSelectUserAddressDetails,
+    state => state.get("userName")
+  );

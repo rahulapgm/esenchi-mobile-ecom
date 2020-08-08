@@ -5,7 +5,9 @@ import {
   UPDATE_CURRENT_ORDER,
   ORDER_API_FETCHING,
   UPDATE_ORDER_API_STATUS,
-  REMOVE_CART_ITEM
+  REMOVE_CART_ITEM,
+  SET_PAYMENT_METHODS,
+  GET_PAYMENT_METHODS
 } from "./constants";
 
 export const viewCartItems = () => {
@@ -52,6 +54,19 @@ export const updateOrderAPIStatus = data => {
 export const removeCartItem = data => {
   return {
     type: REMOVE_CART_ITEM,
+    data
+  }
+}
+
+export const getPaymentMethods = () => {
+  return {
+    type: GET_PAYMENT_METHODS,
+  }
+}
+
+export const setPaymentMethods = (data) =>{
+  return {
+    type: SET_PAYMENT_METHODS,
     data
   }
 }

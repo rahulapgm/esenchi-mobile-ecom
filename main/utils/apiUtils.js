@@ -1,13 +1,19 @@
 import axios from "axios";
+import {AsyncStorage} from 'react-native';
 import { apiEndPoints } from "../configs/apiEndpoints";
 
 export const siteURL = "https://sanchi-server-app.herokuapp.com";
 
 export function* triggerAPIRequest(key, method = "GET", data = {}) {
   let entryPoint = "";
-  let token = "";
+
+  let token = yield AsyncStorage.getItem('userToken');
+
+  if(!data.customerPh){
+    data.customerPh = yield AsyncStorage.getItem('userPhoneNumber');
+  }
+
   let options = {};
-  data.customerPh = "+919633882121";
   if (apiEndPoints[key]) {
     entryPoint = `${siteURL}${apiEndPoints[key]}`;
     console.log("entryPoint => ", entryPoint);
@@ -20,7 +26,7 @@ export function* triggerAPIRequest(key, method = "GET", data = {}) {
           "Access-Control-Allow-Origin": "*",
           Accept: "application/json",
           "Content-Type": "application/json",
-          token
+          "access-token": token
         }
       };
     } else {
@@ -32,7 +38,7 @@ export function* triggerAPIRequest(key, method = "GET", data = {}) {
           "Access-Control-Allow-Origin": "*",
           Accept: "application/json",
           "Content-Type": "application/json",
-          token
+          "access-token": token
         }
       };
     }

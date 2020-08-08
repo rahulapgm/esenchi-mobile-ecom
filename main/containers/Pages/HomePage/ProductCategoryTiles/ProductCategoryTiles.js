@@ -21,9 +21,6 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    loginUser: userData => dispatch(signInUser(userData)),
-    verifyUserLogin: userData => dispatch(verifyLogin(userData)),
-    resetUserLoginDetails: () => dispatch(resetUserLoginData())
   };
 };
 const withConnect = connect(

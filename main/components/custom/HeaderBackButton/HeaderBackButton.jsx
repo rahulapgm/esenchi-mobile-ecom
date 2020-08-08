@@ -3,7 +3,7 @@ import { TouchableOpacity } from "react-native";
 
 import { MaterialCommunityIcons } from "react-native-vector-icons";
 
-export const HeaderBackButton = ({ navigation, targetPage = "App", onBackBtnPress = () => {} }) => {
+export const HeaderBackButton = ({ navigation, targetPage = "App", onBackBtnPress = () => {}, iconSize= 26, btnStyle={} }) => {
   return (
     <TouchableOpacity
       onPress={() => {
@@ -13,10 +13,11 @@ export const HeaderBackButton = ({ navigation, targetPage = "App", onBackBtnPres
       style={{
         color: "#0099ff",
         backgroundColor: "white",
-        paddingHorizontal: 24
+        paddingHorizontal: 24,
+        ...btnStyle
       }}
     >
-      <MaterialCommunityIcons name="arrow-left-bold-circle" size={26} />
+      <MaterialCommunityIcons name="arrow-left-bold-circle" size={iconSize} />
     </TouchableOpacity>
   );
 };

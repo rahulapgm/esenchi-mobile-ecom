@@ -9,13 +9,16 @@ import {
 } from "../Cart/selectors";
 import toJS from "../../../hoc/toJS/toJS";
 
+import { makePaymentMethods } from "./selectors";
+
 import { selectUserAddress } from "../ChangeAddress/selectors";
 
 const mapStateToProps = createStructuredSelector({
   cartDetailsObj: makeSelectCartItems(),
   isOrderApiFetching: makeSelectOrderApiFetching(),
   currentOrderAPIStatus: makeSelectOrderAPIStatus(),
-  userAddress: selectUserAddress()
+  userAddress: selectUserAddress(),
+  paymentMethods: makePaymentMethods()
 });
 
 const mapDispatchToProps = dispatch => {

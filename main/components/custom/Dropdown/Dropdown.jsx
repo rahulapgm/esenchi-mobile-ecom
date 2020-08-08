@@ -58,7 +58,7 @@ export const Dropdown = props => {
           </Text>
           <Image
             style={styles.upDownArrowIcon}
-            source={require("../../../../assets/icons/dropdown00003.png")}
+            source={require("../../../../assets/icons/dropdown00001.png")}
           />
         </TouchableOpacity>
       </View>

@@ -2,7 +2,6 @@ import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
   orderItems: {
-    backgroundColor: "#F6F6F7",
     flexDirection: "column",
     padding: 6,
   },

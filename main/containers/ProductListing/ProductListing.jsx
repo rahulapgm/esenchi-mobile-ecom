@@ -56,7 +56,6 @@ export class ProductListing extends React.PureComponent {
   }
 
   _handleLoadMore = () => {
-    console.log("loading content");
     if (!this.props.isAllDocumentLoaded) {
       let { startPage } = this;
 
@@ -134,7 +133,8 @@ export class ProductListing extends React.PureComponent {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    flexDirection: "column"
+    flexDirection: "column",
+    backgroundColor:"#fafafa"
   }
 });
 

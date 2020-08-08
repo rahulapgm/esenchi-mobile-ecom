@@ -6,13 +6,14 @@ import toJS from "../../../hoc/toJS/toJS";
 
 import {saveAddress} from './actions';
 
-import { selectUserPincode, selectUserLandMark, selectUserAddress, selectIsUpdating } from './selectors';
+import { selectUserPincode, selectUserLandMark, selectUserAddress, selectIsUpdating, selectUserName } from './selectors';
 
 const mapStateToProps = createStructuredSelector({
   userPincode: selectUserPincode(),
   userLankMark: selectUserLandMark(),
   userAddress: selectUserAddress(),
-  isUpdating: selectIsUpdating()
+  isUpdating: selectIsUpdating(),
+  userName: selectUserName()
 });
 
 const mapDispatchToProps = dispatch => {

@@ -25,6 +25,10 @@
     "ios": {
       "supportsTablet": true
     },
-    "sdkVersion": "36.0.0"
+    "sdkVersion": "36.0.0",
+    "android": {
+      "package": "com.yourcompany.yourappname",
+      "versionCode": 1
+    }
   }
 }

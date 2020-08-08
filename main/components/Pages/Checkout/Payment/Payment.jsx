@@ -10,13 +10,7 @@ import ShadowBox from "../../../../hoc/ShadowBox";
 
 export const Payment = props => {
   const [checked, setChecked] = React.useState(0);
-  const paymentMethods = [
-    { type: "UPI", icon: "contactless-payment", selected: true },
-    { type: "Google Pay", icon: "google", selected: false },
-    { type: "Credit/Debit/ATM Card", icon: "credit-card", selected: false },
-    { type: "Cash On Delivery", icon: "cash", selected: false }
-  ];
-  const test = true;
+  const {paymentMethods = []} = props;
   return (
     <View style={{ marginBottom: 24 }}>
       <Heading type="h2">PAYMENT</Heading>

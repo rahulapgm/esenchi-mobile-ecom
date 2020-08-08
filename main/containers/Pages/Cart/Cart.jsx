@@ -12,7 +12,8 @@ import {
   updateCurrentOrder,
   updateItemQuantity,
   removeCartItem,
-  orderAPIFetching
+  orderAPIFetching,
+  getPaymentMethods
 } from "./actions";
 import {
   makeSelectCartItems,
@@ -32,6 +33,7 @@ export class Cart extends PureComponent {
   componentDidMount(){
     this._unsubscribe = this.props.navigation.addListener("focus", () => {
       this.onScreenFocus();
+
     });
   }
 
@@ -40,6 +42,7 @@ export class Cart extends PureComponent {
   }
 
   onScreenFocus = () => {
+    this.props.getAllPaymentMethods();
     this.props.fetchCartItems();
     if(!this.props.userAddress){
       this.props.getUserAddress();
@@ -79,7 +82,8 @@ const mapDispatchToProps = dispatch => {
       dispatch(removeCartItem(productId));
     },
     setOrderAPIFetchingState: data => dispatch(orderAPIFetching(data)),
-    getUserAddress: () => dispatch(getUserAddress())
+    getUserAddress: () => dispatch(getUserAddress()),
+    getAllPaymentMethods: () => dispatch(getPaymentMethods())
   };
 };
 

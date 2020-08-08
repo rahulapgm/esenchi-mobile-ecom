@@ -19,8 +19,6 @@ export function* fetchSearchSuggestions(actionObj) {
         }
       });
 
-      console.log(suggestionData);
-
       yield put(setSearchSuggestion(suggestionData));
     }
   } catch (e) {}

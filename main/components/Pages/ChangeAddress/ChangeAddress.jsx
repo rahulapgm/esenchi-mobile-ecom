@@ -12,7 +12,7 @@ import {
   Colors
 } from "react-native-paper";
 
-import { View } from "react-native";
+import { View, TouchableOpacity, ScrollView } from "react-native";
 import ShadowBox from "../../../hoc/ShadowBox/ShadowBox";
 
 import Brand from "../../../components/common/Brand/Brand";
@@ -20,8 +20,9 @@ import Brand from "../../../components/common/Brand/Brand";
 import styles from "./changeAddressStyles";
 
 export const ChangeAddress = props => {
-  const { userAddress, isUpdating } = props;
-  let HouseName = "";
+  const { userAddress, isUpdating, userName = "" } = props;
+
+  let houseName = "";
   let userLandMark = "";
   let street = "";
   let panchayath = "";
@@ -31,12 +32,12 @@ export const ChangeAddress = props => {
   if (userAddress && !initialStateLoad) {
     const userAddressArray = userAddress.split(",");
     if (userAddressArray.length === 4) {
-      HouseName = userAddressArray[0].trim();
+      houseName = userAddressArray[0].trim();
       street = userAddressArray[1].trim();
       panchayath = userAddressArray[2].trim();
       pinCode = userAddressArray[3].trim();
     } else if (userAddressArray.length === 5) {
-      HouseName = userAddressArray[0].trim();
+      houseName = userAddressArray[0].trim();
       userLandMark = userAddressArray[1].trim();
       street = userAddressArray[2].trim();
       panchayath = userAddressArray[3].trim();
@@ -51,11 +52,12 @@ export const ChangeAddress = props => {
   const [saveAddressBtnClicked, setSaveAddressBtnClicked] = useState(false);
   const [errorMsgs, setErrorMsgs] = useState([]);
   const [addressObj, setAddressObj] = React.useState({
-    HouseName,
+    houseName,
     street,
     panchayath,
     pinCode,
-    userLandMark
+    userLandMark,
+    userName
   });
 
   const [dialogVisible, setDialogVisiblity] = React.useState(false);
@@ -76,7 +78,10 @@ export const ChangeAddress = props => {
 
   const validateAddressObject = addressObj => {
     const errArray = [];
-    if (!addressObj.HouseName) {
+    if (!addressObj.userName) {
+      errArray.push("userName");
+    }
+    if (!addressObj.houseName) {
       errArray.push("");
     }
     if (!addressObj.street) {
@@ -96,7 +101,7 @@ export const ChangeAddress = props => {
   };
 
   return (
-    <React.Fragment>
+    <ScrollView>
       <Portal>
         <Dialog visible={dialogVisible} onDismiss={hideDialog}>
           <Dialog.Title>Are you in this location, Right now?</Dialog.Title>
@@ -131,19 +136,38 @@ export const ChangeAddress = props => {
         <Subheading>DELIVERY ADDRESS</Subheading>
 
         <TextInput
-          label="House Name/Flat No(വീടുപേര്‍)*:"
-          value={addressObj.HouseName}
+          label="Name(പേര്)*:"
+          value={addressObj.userName}
           onChangeText={text =>
-            setAddressObj({ ...addressObj, HouseName: text })
+            setAddressObj({ ...addressObj, userName: text })
           }
           style={styles.inputTextStyle}
-          error={saveAddressBtnClicked && addressObj.HouseName === ""}
+          error={saveAddressBtnClicked && addressObj.userName === ""}
         />
 
-        {saveAddressBtnClicked && addressObj.HouseName === "" && (
+        {saveAddressBtnClicked && addressObj.userName === "" && (
           <HelperText
             type="error"
-            visible={saveAddressBtnClicked && addressObj.HouseName === ""}
+            visible={saveAddressBtnClicked && addressObj.userName === ""}
+          >
+            Please provide your name(പേര്).
+          </HelperText>
+        )}
+
+        <TextInput
+          label="House Name/Flat No(വീടുപേര്‍)*:"
+          value={addressObj.houseName}
+          onChangeText={text =>
+            setAddressObj({ ...addressObj, houseName: text })
+          }
+          style={styles.inputTextStyle}
+          error={saveAddressBtnClicked && addressObj.houseName === ""}
+        />
+
+        {saveAddressBtnClicked && addressObj.houseName === "" && (
+          <HelperText
+            type="error"
+            visible={saveAddressBtnClicked && addressObj.houseName === ""}
           >
             Please provide your House Name/Ward No./Flat No.
           </HelperText>
@@ -212,9 +236,8 @@ export const ChangeAddress = props => {
           </HelperText>
         )}
 
-        <Button
-          mode="contained"
-          style={{ margin: 12 }}
+        <TouchableOpacity
+          style={styles.saveAddressBtn}
           onPress={() => {
             setSaveAddressBtnClicked(true);
             validateAddressObject(addressObj);
@@ -225,13 +248,16 @@ export const ChangeAddress = props => {
               animating={true}
               color={Colors.white}
               size={17}
-              style={{ width: "100%" }}
+              style={{ width: "100%", padding: 6 }}
             />
           ) : (
-            "SAVE ADDRESS"
+            <Subheading style={{ color: "white", textAlign: "center" }}>
+              SAVE ADDRESS
+            </Subheading>
           )}
-        </Button>
+        </TouchableOpacity>
       </ShadowBox>
+
       <View
         style={{
           flexDirection: "column",
@@ -243,7 +269,7 @@ export const ChangeAddress = props => {
       >
         <Brand brandIcon={styles.brandIcon} brandFontSize={24} />
       </View>
-    </React.Fragment>
+    </ScrollView>
   );
 };
 
