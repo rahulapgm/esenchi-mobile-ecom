@@ -56,32 +56,46 @@ export class CategoryDrawer extends React.PureComponent {
                   >
                     <List.Accordion
                       title={item.categoryName}
-                      expanded={this.state.expandedCategoryId===item.categoryId}
+                      expanded={this.state.expandedCategoryId === item.categoryId}
                       onPress={() => {
-                        if(this.state.expandedCategoryId === item.categoryId){
-                          this._handlePress(null)
+                        if (this.state.expandedCategoryId === item.categoryId) {
+                          this._handlePress(null);
                         } else {
-                          this._handlePress(item.categoryId)
+                          this._handlePress(item.categoryId);
                         }
                       }}
-                      >
+                    >
                       {item.subCategoryList &&
                         item.subCategoryList.map(subCategoryItem => {
                           return (
                             <TouchableOpacity
                               key={subCategoryItem}
                               onPress={() => {
+                                console.log("item", item);
                                 this.props.navigation.toggleDrawer();
-                                this.props.navigation.navigate(
-                                  "ProductListing",
-                                  {
-                                    screen: "CategoryListing",
-                                    params: {
-                                      categoryName: item.categoryName,
-                                      subCategoryItem
+                                if (item.categoryName === "Combos") {
+                                  this.props.navigation.navigate(
+                                    "Combos",
+                                    {
+                                      screen: "CombosList",
+                                      params: {
+                                        categoryName: item.categoryName,
+                                        subCategoryItem
+                                      }
                                     }
-                                  }
-                                );
+                                  );
+                                } else {
+                                  this.props.navigation.navigate(
+                                    "ProductListing",
+                                    {
+                                      screen: "CategoryListing",
+                                      params: {
+                                        categoryName: item.categoryName,
+                                        subCategoryItem
+                                      }
+                                    }
+                                  );
+                                }
                               }}
                             >
                               <List.Item
@@ -97,7 +111,7 @@ export class CategoryDrawer extends React.PureComponent {
                           this.props.navigation.navigate("ProductListing", {
                             screen: "CategoryListing",
                             params: {
-                              pageType:"categoryLanding",
+                              pageType: "categoryLanding",
                               categoryName: item.categoryName,
                               subCategoryItem: item.categoryName
                             }

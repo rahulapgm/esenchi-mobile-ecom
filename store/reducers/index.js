@@ -6,8 +6,9 @@ import { productListReducers as searchResults } from "../../main/containers/Prod
 import { toastReducers as toast } from "../../main/hoc/Toast/reducer";
 import { loaderReducers as loader } from "../../main/hoc/Loader/reducer";
 import { productSearchReducers as productSearch } from "../../main/containers/ProductSearch/ProductSearchV2/reducers";
-import { productCartReducer as productCart} from "../../main/containers/ProductListing/Product/reducers";
-import { addressReducers as userAddressDetails} from "../../main/containers/Pages/ChangeAddress/reducers";
+import { productCartReducer as productCart } from "../../main/containers/ProductListing/Product/reducers";
+import { addressReducers as userAddressDetails } from "../../main/containers/Pages/ChangeAddress/reducers";
+import { combosReducer } from "../../main/containers/Pages/Combos/reducers";
 
 export default combineReducers({
   loginReducer,
@@ -18,5 +19,6 @@ export default combineReducers({
   productSearch,
   productCart,
   userAddressDetails,
-  loader
+  loader,
+  combos: combosReducer
 });
