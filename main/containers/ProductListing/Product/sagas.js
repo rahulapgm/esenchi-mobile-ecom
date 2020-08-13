@@ -9,16 +9,18 @@ import { showToastMsg } from "../../../hoc/Toast/actions";
 
 export function* addItemToCart({ data }) {
   const { productName = "" } = data;
-  const response = yield triggerAPIRequest("addCartItem", "POST", data);
-  if (response && response.status == 200) {
-    const { user } = response.data;
-    yield put(addToCartAction.success());
-    yield put(
-      showToastMsg({
-        toastMsg: `Successfully Added '${productName}' to Cart`
-      })
-    );
-  } else {
+  try {
+    const response = yield triggerAPIRequest("addCartItem", "POST", data);
+    if (response && response.status == 200) {
+      const { user } = response.data;
+      yield put(addToCartAction.success());
+      yield put(
+        showToastMsg({
+          toastMsg: `Successfully Added '${productName}' to Cart`
+        })
+      );
+    }
+  } catch (error) {
     yield put(addToCartAction.failure());
     yield put(
       showToastMsg({ toastMsg: `Failed to add '${productName}', Sorry..` })

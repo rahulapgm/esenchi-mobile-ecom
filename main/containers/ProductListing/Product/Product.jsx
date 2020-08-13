@@ -19,12 +19,8 @@ const mapStateToProps = createStructuredSelector({
   isUpdatingCartId: selectProductState()
 });
 
-const mapDispatchToProps = dispatch => {
-  return {
-    addToCart: data => {
-      dispatch(addToCartAction.request(data));
-    }
-  };
+const mapDispatchToProps = {
+  addToCart: addToCartAction.request
 };
 
 const withConnect = connect(
