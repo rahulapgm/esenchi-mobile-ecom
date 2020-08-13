@@ -14,6 +14,8 @@ import PaymentScreen from "../screens/PaymentScreen";
 
 import BottamTabNavigator from "./BottomTabNavigator";
 import transitionConfig from "../main/configs/transistionConfig";
+import ComboScreen from "../screens/ComboScreen";
+import ComboDetailScreen from "../screens/ComboDetailScreen";
 
 const AppNavigator = createCompatNavigatorFactory(createStackNavigator)(
   {
@@ -24,7 +26,9 @@ const AppNavigator = createCompatNavigatorFactory(createStackNavigator)(
     Checkout: { screen: CheckoutScreen },
     ProductListing: { screen: CategoryListingScreen },
     ChangeAddress: { screen: ChangeAddressScreen },
-    PaymentGatewayScreen: { screen: PaymentScreen }
+    PaymentGatewayScreen: { screen: PaymentScreen },
+    Combos: { screen: ComboScreen },
+    ComboView: { screen: ComboDetailScreen }
   },
   {
     initialRouteName: "AuthManager",
