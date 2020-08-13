@@ -13,7 +13,6 @@ export function* updateCartItemQuantity(actionObj) {
   try {
     const { data } = actionObj;
     const requestData = {
-      customerPh: "+919633882121",
       ...data
     };
 

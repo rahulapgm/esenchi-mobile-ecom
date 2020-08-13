@@ -21,11 +21,10 @@ import triggerAPIRequest from "../../../utils/apiUtils";
 import { makeSelectOrderApiFetching } from "./selectors";
 
 export function* fetchUserCartItems() {
-  const data = { customerPh: "+919633882121" };
   const isOrderApiFetching = yield select(makeSelectOrderApiFetching());
   if (!isOrderApiFetching) {
     yield put(orderAPIFetching(true));
-    const response = yield triggerAPIRequest("viewCart", "POST", data);
+    const response = yield triggerAPIRequest("viewCart", "POST",{});
     if (response && response.status == 200) {
       yield put(viewCartItemsSucess(response.data));
       yield put(orderAPIFetching(false));
@@ -38,7 +37,6 @@ export function* fetchUserCartItems() {
 }
 
 export function* updateOrder() {
-  const data = { customerPh: "+919633882121" };
   try {
     yield put(orderAPIFetching(true));
     const response = yield triggerAPIRequest("updateOrder", "POST", data);
@@ -75,7 +73,6 @@ export function* removeProductFromCart(actionObj) {
   try {
     yield put(updateFetchingProductId(productId));
     const response = yield triggerAPIRequest("removeCartItem", "POST", {
-      customerPh: "+919633882121",
       productId
     });
     if (response && response.status == 200) {

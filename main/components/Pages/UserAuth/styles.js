@@ -10,7 +10,7 @@ export const styles = StyleSheet.create({
     flexDirection: "column",
     alignItems: "center",
     backgroundColor: "white",
-    top: 24
+    top: 6
   },
   userInputs: { marginTop: 32, flexDirection: "column", flex: 1 },
   inputItem: {
@@ -19,12 +19,13 @@ export const styles = StyleSheet.create({
   welcomeMsg: {
     color: "black",
     textAlign: "center",
-    fontSize: 16
+    fontSize: 16,
+    marginBottom:12
   },
   signInView: {
     flex: 1,
     flexDirection: "column",
-    top: 42,
+    marginTop: 12,
     width: "72%"
   },
   signInBanner: {
@@ -46,8 +47,15 @@ export const styles = StyleSheet.create({
     padding: 8
   },
   brandIcon: {
-    height: 56,
-    width: 80
+    justifyContent:"center",
+    alignItems:"center",
+    height: 32,
+    width: 40
+  },
+  brandViewStyle:{
+    flexDirection:"column",
+    justifyContent:"center",
+    alignItems:"center",
   },
   address: {}
 });

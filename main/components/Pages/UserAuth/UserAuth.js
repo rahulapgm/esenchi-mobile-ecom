@@ -4,10 +4,11 @@ import {
   View,
   TouchableWithoutFeedback,
   Keyboard,
-  SafeAreaView
+  SafeAreaView,
+  ScrollView
 } from "react-native";
 
-import { TextInput, Subheading, HelperText, Button } from "react-native-paper";
+import { TextInput, Subheading, HelperText, Button,Card } from "react-native-paper";
 
 import Brand from "../../common/Brand/Brand";
 
@@ -50,43 +51,46 @@ class UserAuth extends React.Component {
     const { showInvalidPhNumberError, customerPh } = this.state;
     const { onBlur, onFocus } = this.props;
     return (
-      <DismissKeyBoard>
-        <SafeAreaView style={styles.container}>
-          <View style={{ top: 42, padding: 6 }}>
-            <Brand brandIcon={styles.brandIcon} brandFontSize={24} />
-          </View>
-          <View style={styles.signInView}>
-            <Subheading style={styles.welcomeMsg}>
-              Welcome, Let's get started!
-            </Subheading>
-            <View style={styles.userInputs}>
-              <Subheading style={{ fontSize: 16 }}>Mobile Number:</Subheading>
-              <TextInput
-                mode="flat"
-                isError={showInvalidPhNumberError && !customerPh}
-                keyboardType="numeric"
-                maxLength={10}
-                autoFocus={true}
-                style={{ backgroundColor: "white", fontSize: 24 }}
-                onChangeText={phoneNumber => this.handleChange(phoneNumber)}
-                error={showInvalidPhNumberError}
-              />
-              <HelperText
-                type="error"
-                visible={showInvalidPhNumberError}
-              >
-                Invalid Phone number, Please correct
-              </HelperText>
+      <ScrollView contentContainerStyle={styles.container}>
+        <DismissKeyBoard>
+          <SafeAreaView style={styles.container}>
+            <View style={{ top: 6, padding: 6 }}>
+              <Brand brandIcon={styles.brandIcon} brandFontSize={24} />
+            </View>
+            <View style={styles.signInView}>
+              <Subheading style={styles.welcomeMsg}>
+                Welcome, Let's get started!
+              </Subheading>
+              <View style={{top:"10%"}}>
+                <Subheading style={{ fontSize: 16 }}>Mobile Number:</Subheading>
+                <TextInput
+                  mode="flat"
+                  isError={showInvalidPhNumberError && !customerPh}
+                  keyboardType="numeric"
+                  maxLength={10}
+                  autoFocus={true}
+                  style={{ backgroundColor: "white", fontSize: 20 }}
+                  onChangeText={phoneNumber => this.handleChange(phoneNumber)}
+                  error={showInvalidPhNumberError}
+                />
+                <HelperText
+                  type="error"
+                  visible={showInvalidPhNumberError}
+                >
+                  Invalid Phone number, Please correct
+                </HelperText>
 
-              <View style={{ padding: 16 }}>
-                <Button mode="contained" onPress={this.handleUserSignIn}>
-                  LOGIN
-                </Button>
+                <View style={{ padding: 12 }}>
+                  <Button mode="contained" onPress={this.handleUserSignIn}>
+                    LOGIN
+                  </Button>
+                </View>
               </View>
             </View>
-          </View>
-        </SafeAreaView>
-      </DismissKeyBoard>
+          </SafeAreaView>
+        </DismissKeyBoard>
+      </ScrollView>
+
     );
   }
 }

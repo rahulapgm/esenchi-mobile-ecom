@@ -6,6 +6,7 @@ import TextBox from "../../../custom/Textbox/Textbox";
 import Brand from "../../../common/Brand/Brand";
 import { styles } from "../styles";
 import HeaderBackButton from "../../../custom/HeaderBackButton/HeaderBackButton";
+import { ScrollView } from "react-native-gesture-handler";
 const BLUE = "#428AF8";
 const LIGHT_GRAY = "#D3D3D3";
 const RED = "#e53935";
@@ -14,9 +15,6 @@ class VerifyOTP extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      customerPh: "+919633882121",
-      pinCode: "678531",
-      customerName: "Rahul Arunachalam",
       otp: ""
     };
   }
@@ -29,7 +27,8 @@ class VerifyOTP extends React.Component {
     } = this.props;
     const { otp } = this.state;
     return (
-      <SafeAreaView style={styles.safeArea}>
+      <ScrollView contentContainerStyle={styles.safeArea}>
+        <SafeAreaView style={styles.safeArea}>
         <HeaderBackButton
           navigation={this.props.navigation}
           targetPage="SignIn"
@@ -38,29 +37,28 @@ class VerifyOTP extends React.Component {
             flexDirection: "row",
             alignItems: "flex-start",
             justifyContent: "flex-start",
-            top: 12
+            top: 12,
+            padding:6
           }}
-          iconSize={36}
+          iconSize={32}
         />
 
         <View style={styles.container}>
-          <View>
-            <Brand brandIcon={styles.brandIcon} brandFontSize={24} />
-          </View>
 
+          <Brand brandIcon={styles.brandIcon} brandFontSize={24} brandViewStyle={styles.brandViewStyle}/>
           <Headline
-            style={{ fontSize: 32, marginTop: 32, textAlign: "center" }}
+            style={{ fontSize: 24, marginTop: 6, textAlign: "center" }}
           >
             VERIFICATION CODE
           </Headline>
           <Subheading
-            style={{ fontSize: 14, textAlign: "justify", padding: 32 }}
+            style={{ fontSize: 14, textAlign: "justify", paddingHorizontal: 12 }}
           >
-            We have send you the One-Time-Password(OTP) through SMS. Please
-            enter your OTP send on {this.state.customerPh}.
+            We have send you the One-Time-Password(OTP) through SMS, you will be receiving OTP within 40 sec. Please
+            enter your OTP send on {this.state.customerPh}
           </Subheading>
 
-          <View style={{ alignItems:"center" }}>
+          <View style={{ alignItems:"center", marginTop:12 }}>
             <TextBox
               isError={inCorrectOTP}
               keyboardType="numeric"
@@ -68,12 +66,12 @@ class VerifyOTP extends React.Component {
               autoFocus={true}
               placeholder="****"
               textInputStyle={{
-                fontSize: 32,
+                fontSize: 28,
                 textAlign: "center",
                 letterSpacing: 20,
-                height: 72,
+                height: 60,
                 width: 300,
-                marginBottom: 20,
+                marginBottom: 12,
               }}
               onChangeText={otp => {
                 if (inCorrectOTP) {
@@ -99,6 +97,9 @@ class VerifyOTP extends React.Component {
           </View>
         </View>
       </SafeAreaView>
+
+      </ScrollView>
+
     );
   }
 }
