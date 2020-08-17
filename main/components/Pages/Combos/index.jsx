@@ -29,7 +29,7 @@ const Combos = ({
         data={list}
         renderItem={renderCard}
         keyExtractor={item => item.comboId}
-        showsHorizontalScrollIndicator={false}
+        showsVerticalScrollIndicator={false}
         contentContainerStyle={{ marginBottom: 10 }}
       />
     </View>

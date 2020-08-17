@@ -45,7 +45,7 @@ const ComboDetail = props => {
               data={comboProductList}
               renderItem={renderCard}
               keyExtractor={item => item.productId}
-              showsHorizontalScrollIndicator={false}
+              showsVerticalScrollIndicator={false}
               contentContainerStyle={{ marginBottom: 10 }}
             />
           )
