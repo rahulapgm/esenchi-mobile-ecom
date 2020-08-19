@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, StyleSheet, ScrollView, Animated, TouchableWithoutFeedback, ImageBackground, Dimensions } from 'react-native';
+import { View, StyleSheet, ScrollView, Animated, Touc, ImageBackground, Dimensions, TouchableOpacity } from 'react-native';
 import { Text, Button } from "react-native-paper";
 import { styles as commonStyles } from "../../common/styles";
 
@@ -33,66 +33,61 @@ const Card = ({
   };
 
   return (
-    <TouchableWithoutFeedback
-      style={styles.touchableContainer}
+
+    <TouchableOpacity
       onPressIn={handlePressIn}
       onPressOut={handlePressOut}
     >
-      <Animated.View
-        style={transformStyle}
-      >
-        <View style={styles.card}>
-          <ImageBackground source={{
-            uri: activeImage
-          }}
-            style={styles.image}>
-          </ImageBackground>
-          <ScrollView
-            decelerationRate={0}
-            snapToInterval={200} //your element width
-            snapToAlignment={"center"}
-            showsHorizontalScrollIndicator={false}
-            horizontal>
-            {
-              product.highLevelProductDetails.map((image, index) => (
-                <TouchableWithoutFeedback
-                  key={index}
-                  onPress={() => setActiveImage(image.productImgUrl)}>
-                  <ImageBackground
-                    source={{
-                      uri: image.productImgUrl
-                    }}
-                    style={styles.cardImage}
-                  />
-                </TouchableWithoutFeedback>
-              ))
-            }
-          </ScrollView>
-          <View style={styles.content}>
-            <View>
-              <Text style={styles.title} numberOfLines={1}>{product.comboName}</Text>
-              <View style={commonStyles.row}>
-                <Text style={commonStyles.strikedPrice}>
-                  {product.comboMRP} Rs.
-                </Text>
-                <Text style={commonStyles.price}>
-                  {product.comboSellingPrice} Rs.
-                </Text>
-              </View>
-            </View>
-            <View>
-              <Button mode="contained" style={styles.packBtn} onPress={() => viewPack(product)}>View pack</Button>
+      <View style={styles.card}>
+        <ImageBackground source={{
+          uri: activeImage
+        }}
+          style={styles.image}>
+        </ImageBackground>
+        <ScrollView
+          decelerationRate={0}
+          snapToInterval={200} //your element width
+          snapToAlignment={"center"}
+          showsHorizontalScrollIndicator={false}
+          horizontal>
+          {
+            product.highLevelProductDetails.map((image, index) => (
+              <TouchableOpacity
+                key={index}
+                onPress={() => setActiveImage(image.productImgUrl)}>
+                <ImageBackground
+                  source={{
+                    uri: image.productImgUrl
+                  }}
+                  style={styles.cardImage}
+                />
+              </TouchableOpacity>
+            ))
+          }
+        </ScrollView>
+        <View style={styles.content}>
+          <View>
+            <Text style={styles.title} numberOfLines={1}>{product.comboName}</Text>
+            <View style={commonStyles.row}>
+              <Text style={commonStyles.strikedPrice}>
+                {product.comboMRP} Rs.
+            </Text>
+              <Text style={commonStyles.price}>
+                {product.comboSellingPrice} Rs.
+            </Text>
             </View>
           </View>
+          <View>
+            <Button mode="contained" style={styles.packBtn} onPress={() => viewPack(product)}>View pack</Button>
+          </View>
         </View>
-      </Animated.View>
-    </TouchableWithoutFeedback>
+      </View>
+    </TouchableOpacity>
   );
 };
 
 const styles = StyleSheet.create({
   card: {
-    display: "flex",
     alignItems: "center",
     justifyContent: "space-between",
     height: 350,
@@ -133,7 +128,6 @@ const styles = StyleSheet.create({
   packBtn: {
     backgroundColor: "#0a00ff",
     color: "#ffffff",
-    width: 150
   },
   productInfo: {
     display: "flex",
