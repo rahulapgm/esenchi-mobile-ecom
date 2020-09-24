@@ -22,10 +22,12 @@ export const Dropdown = props => {
           transparent={true}
           onDismiss={toggleView}
           onRequestClose={toggleView}
-          >
+        >
           <View style={styles.optionListView}>
-            {productName && (<Text style={styles.productName}>Product: {productName}</Text>) }
-            {optionsList.map((option, index) => {
+            {productName && (
+              <Text style={styles.productName}>Product: {productName}</Text>
+            )}
+            {optionsList.map(option => {
               return (
                 <TouchableOpacity
                   style={styles.optionView}
@@ -33,7 +35,7 @@ export const Dropdown = props => {
                     toggleView();
                     callbackForUpdate(option);
                   }}
-                  key={index}
+                  key={option}
                 >
                   <Text style={styles.optionText}>
                     {option.displayLabel || "Label Missing"}

@@ -56,7 +56,7 @@ const searchStyle = StyleSheet.create({
     shadowColor: "#cccccc",
     shadowOffset: { width: 3, height: 3 },
     shadowOpacity: 1.0,
-    elevation: 20,
+    elevation: 3,
     height: 40,
     margin: 15,
   },

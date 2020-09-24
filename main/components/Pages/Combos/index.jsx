@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { View, StyleSheet, FlatList } from 'react-native';
+import { View, StyleSheet, FlatList, SafeAreaView } from 'react-native';
 import ComboCard from "./ComboCard";
 import ComboDetail from './ComboDetail';
 const Combos = ({
@@ -30,18 +30,15 @@ const Combos = ({
         renderItem={renderCard}
         keyExtractor={item => item.comboId}
         showsHorizontalScrollIndicator={false}
-        contentContainerStyle={{ marginBottom: 10 }}
+        contentContainerStyle={{ paddingHorizontal:12 }}
       />
-    </View>
+  </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    height: "100%",
     flex: 1,
-    paddingLeft: 20,
-    paddingRight: 20
   }
 });
 

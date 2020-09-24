@@ -3,9 +3,6 @@ import { SafeAreaView, StyleSheet, Modal, Text, Image } from "react-native";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
 import { compose } from "redux";
-import Lottie from "lottie-react-native";
-import { Animated, Easing } from 'react-native';
-
 
 import toJS from "../toJS/toJS";
 

@@ -1,10 +1,9 @@
-import React, { useEffect } from 'react';
-import { View, StyleSheet, FlatList } from 'react-native';
+import React, { useEffect } from "react";
+import { View, StyleSheet, FlatList } from "react-native";
 import ComboDetailCard from "./ComboDetailCard";
 import { FAB, ActivityIndicator } from "react-native-paper";
 
 const ComboDetail = props => {
-
   const {
     fetchComboDetails,
     isAddingCombos,
@@ -20,9 +19,7 @@ const ComboDetail = props => {
   }, []);
 
   const renderCard = ({ item }) => {
-    return (
-      <ComboDetailCard product={item} />
-    );
+    return <ComboDetailCard product={item} />;
   };
 
   const addComboToCart = () => {
@@ -36,55 +33,49 @@ const ComboDetail = props => {
 
   return (
     <View style={styles.container}>
-      {
-        isFetchingCombos
-          ? <ActivityIndicator animating={true} color="#0a00ff" />
-          : (
-            <FlatList
-              style={styles.flatList}
-              data={comboProductList}
-              renderItem={renderCard}
-              keyExtractor={item => item.productId}
-              showsHorizontalScrollIndicator={false}
-              contentContainerStyle={{ marginBottom: 10 }}
-            />
-          )
-      }
+      {isFetchingCombos ? (
+        <ActivityIndicator animating={true} color="#0a00ff" />
+      ) : (
+        <FlatList
+          style={styles.flatList}
+          data={comboProductList}
+          renderItem={renderCard}
+          keyExtractor={item => item.productId}
+          showsVerticalScrollIndicator={false}
+          contentContainerStyle={{padding:6, paddingBottom:56}}
+        />
+      )}
       <View style={styles.fabContainer}>
         <FAB
           style={styles.fabBtn}
           label="Add to cart"
           loading={isAddingCombos}
           onPress={addComboToCart}
-          extended />
+          extended
+        />
       </View>
     </View>
   );
-
 };
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: 50,
     flex: 1,
     alignItems: "center",
     alignContent: "center",
-    marginLeft: 20,
-    marginRight: 20
   },
   flatList: {
     width: "100%",
-    marginBottom: 60,
-    borderRadius: 15
+    borderRadius: 2
   },
   fabContainer: {
-    position: 'absolute',
-    right: 0,
-    bottom: 0,
-    width: "100%",
     flexDirection: "row",
     justifyContent: "center",
-    marginBottom: 35,
+    width: "100%",
+    position: "absolute",
+    right: 0,
+    bottom: 12,
+    backgroundColor: "transparent"
   },
   fabBtn: {
     width: 200

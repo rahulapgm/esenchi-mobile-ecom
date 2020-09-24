@@ -33,3 +33,9 @@ export const selectUserName = () =>
     MakeSelectUserAddressDetails,
     state => state.get("userName")
   );
+
+export const selectEstimatedDelivery = () =>
+  createSelector(
+    MakeSelectUserAddressDetails,
+    state => state.get("estimatedDelivery")
+  );

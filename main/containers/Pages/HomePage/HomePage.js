@@ -1,12 +1,10 @@
 import React from "react";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
-import { View, ActivityIndicator, StatusBar, Alert } from "react-native";
 import HomePageComponent from "../../../components/Pages/HomePage/HomePage";
 
 import { getCategoryList } from "../../CategoryDrawer/actions";
-import { makeSelectCategoryList } from "../../CategoryDrawer/selectors";
-import toJS from '../../../hoc/toJS/toJS';
+import toJS from "../../../hoc/toJS/toJS";
 
 import { getUserAddress } from "../ChangeAddress/actions";
 

@@ -92,12 +92,13 @@ export class ProductListing extends React.PureComponent {
   render() {
     if (!this.props.productList.length && this.props.showProductListLoader) {
       return <SkeletonComponent text={"Thank You for Using eSenchi.."} />;
-    }
-
-    else if (!this.props.productList.length && !this.props.showProductListLoader) {
+    } else if (
+      !this.props.productList.length &&
+      !this.props.showProductListLoader
+    ) {
       return (
-        <View style={{paddingVertical:24}}>
-          <Text style={{textAlign:"center"}}>
+        <View style={{ paddingVertical: 24 }}>
+          <Text style={{ textAlign: "center" }}>
             Uff! No product available for '{this.subCategoryItem}', Sorry..
           </Text>
         </View>
@@ -133,8 +134,7 @@ export class ProductListing extends React.PureComponent {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    flexDirection: "column",
-    backgroundColor:"#fafafa"
+    flexDirection: "column"
   }
 });
 

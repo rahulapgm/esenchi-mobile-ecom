@@ -1,6 +1,6 @@
 import { fromJS } from "immutable";
 
-import { SET_ADDRESS, IS_UPDATING } from "./constants";
+import { SET_ADDRESS, IS_UPDATING, SET_ESTIMATED_DELIVERY_TIME } from "./constants";
 
 const initialState = fromJS({
   userAddress: "",
@@ -21,10 +21,11 @@ export const addressReducers = (
         .set("userLandMark", data.userLandMark)
         .set("userPincode", data.userPincode)
         .set("userName", data.userName)
-
+        .set("estimatedDelivery", data.estimatedDelivery)
     case IS_UPDATING:
       return state.set('isUpdating', data);
-
+    case SET_ESTIMATED_DELIVERY_TIME:
+      return state.set("estimatedDelivery",data);
     default:
       return state;
   }

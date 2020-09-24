@@ -1,25 +1,28 @@
 import React from "react";
 
-import { View, Image, Text, StyleSheet } from "react-native";
+import { View, Image, Text } from "react-native";
+
+import { Headline } from "react-native-paper";
 
 import { styles } from "./brandStyles.js";
 
 const Brand = props => {
   const { brandFontSize, brandIcon, brandViewStyle } = props;
   return (
-    <View style={brandViewStyle}>
+    <View style={{ ...styles.viewStyle, ...brandViewStyle }}>
       <Image
         style={brandIcon}
-        source={require("../../../../assets/images/healthy-eating-1.png")}
+        source={require("../../../../assets/images/standard-32x32.png")}
       />
-      <Text
+      <Headline
         style={{
-          ...styles.brandTitle,
-          fontSize: brandFontSize
+          fontSize: brandFontSize,
+          fontWeight: "bold",
+          ...styles.brandTitle
         }}
       >
         eSenchi
-      </Text>
+      </Headline>
     </View>
   );
 };

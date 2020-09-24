@@ -7,7 +7,10 @@ import {
   UPDATE_ORDER_API_STATUS,
   REMOVE_CART_ITEM,
   SET_PAYMENT_METHODS,
-  GET_PAYMENT_METHODS
+  GET_PAYMENT_METHODS,
+  REMOVE_CART_COMBO_ITEM,
+  GET_ESTIMATED_DELIVERY,
+  SET_ESTIMATED_DELIVERY
 } from "./constants";
 
 export const viewCartItems = () => {
@@ -67,6 +70,13 @@ export const getPaymentMethods = () => {
 export const setPaymentMethods = (data) =>{
   return {
     type: SET_PAYMENT_METHODS,
+    data
+  }
+}
+
+export const removeCartComboItem = data => {
+  return {
+    type: REMOVE_CART_COMBO_ITEM,
     data
   }
 }

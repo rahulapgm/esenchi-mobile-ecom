@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.2,
     shadowRadius: 8,
     elevation: 5,
-    marginBottom: 30,
+    marginBottom: 12,
   },
   cardImage: {
     height: 90,
@@ -51,7 +51,8 @@ const styles = StyleSheet.create({
   content: {
     alignItems: "flex-start",
     justifyContent: "center",
-    flex: 1
+    flex: 1,
+    paddingVertical: 6
   },
   mainText: {
     fontSize: 18,

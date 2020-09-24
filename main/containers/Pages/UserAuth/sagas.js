@@ -17,7 +17,6 @@ import { setAddress } from "../ChangeAddress/actions";
 import triggerAPIRequest from "../../../utils/apiUtils";
 import * as RootNavigation from "../../../../RootNavigation";
 
-// import NavigationService from "../../../utils/navigationService";
 
 import { showLoader, closeLoader } from "../../../hoc/Loader/actions";
 import { showToastMsg } from "../../../hoc/Toast/actions";
@@ -78,7 +77,7 @@ export function* invokeOTPValidation(userData) {
         );
         if (userAddress) {
           yield RootNavigation.navigate("App", {
-            screen: "HomeMain"
+            screen: "Home"
           });
         } else {
           yield RootNavigation.navigate("ChangeAddress", {

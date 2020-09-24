@@ -1,11 +1,13 @@
 import React from "react";
-
+import { Title } from "react-native-paper";
 import { View, Text, ScrollView, Alert } from "react-native";
 
 import ShadowBox from "../../../hoc/ShadowBox";
 import OrderItem from "../../../containers/Pages/Cart/OrderItem/OrderItem";
 import OrderSummary from "./OrderSummary/OrderSummary";
 import CheckoutBtn from "./CheckoutBtn/CheckoutBtn";
+import { ComboOrderItem } from "./ComboOrderItem/ComboOrderItem";
+import EstimatedDelivery from "../../../containers/Pages/ChangeAddress/EstimatedDelivery/EstimatedDelivery";
 
 export class Cart extends React.Component {
   constructor(props) {
@@ -37,11 +39,7 @@ export class Cart extends React.Component {
   };
 
   renderItemMarkup = obj => {
-    const {
-      pricingDetails = {},
-      productId,
-      selectedPricingSkuIndex = ""
-    } = obj;
+    const { pricingDetails = {}, selectedPricingSkuIndex = "" } = obj;
     return (
       <OrderItem
         key={selectedPricingSkuIndex}
@@ -50,6 +48,18 @@ export class Cart extends React.Component {
         pricingSkuKeys={Object.keys(pricingDetails)}
         alertOnRemove={this.alertOnRemove}
         selectedPricingSkuIndex={selectedPricingSkuIndex}
+        updatingProductId={this.props.updatingProductId}
+      />
+    );
+  };
+
+  renderCombosMarkup = comboObj => {
+    const { removeComboItem } = this.props;
+    return (
+      <ComboOrderItem
+        key={comboObj.comboName}
+        combo={comboObj}
+        removeComboItem={removeComboItem}
         updatingProductId={this.props.updatingProductId}
       />
     );
@@ -74,12 +84,13 @@ export class Cart extends React.Component {
   };
 
   render() {
-    const { cartDetails = {}, fetchCurrentOrder } = this.props;
+    const { cartDetails = {}, fetchCheckoutItems } = this.props;
     const {
       cartProductItems = [],
       cartTotalAmount = "..",
       cartTotalSavings = "..",
-      cartTotalMRPRate = ""
+      cartTotalMRPRate = "",
+      comboItemsData = []
     } = cartDetails;
 
     const vegetables = [];
@@ -87,7 +98,10 @@ export class Cart extends React.Component {
     const others = [];
 
     cartProductItems.map(obj => {
-      if (obj.productCategory && obj.productCategory.toLowerCase().indexOf("vegetable") > -1){
+      if (
+        obj.productCategory &&
+        obj.productCategory.toLowerCase().indexOf("vegetable") > -1
+      ) {
         vegetables.push(obj);
       } else {
         groceries.push(obj);
@@ -95,29 +109,58 @@ export class Cart extends React.Component {
     });
 
     return (
-      <View style={{ flex: 1}}>
+      <View style={{ flex: 1, backgroundColor: "#fbfbfb" }}>
         <ScrollView>
+          <EstimatedDelivery navigation={this.props.navigation} />
           <OrderSummary
             cartTotalAmount={cartTotalAmount}
             cartTotalSavings={cartTotalSavings}
             cartTotalMRPRate={cartTotalMRPRate}
             {...this.props}
           />
-
+          {comboItemsData && comboItemsData.length ? (
+            <ShadowBox style={{ marginTop: 6, backgroundColor: "#f1f1f1" }}>
+              <Title
+                style={{
+                  textAlign: "center",
+                  paddingVertical: 6,
+                  fontWeight: "bold",
+                  fontSize: 16,
+                  color: "blue"
+                }}
+              >
+                COMBO PACKS
+              </Title>
+              {comboItemsData.map(comboObj => {
+                return (
+                  <React.Fragment key={comboObj.comboName}>
+                    {this.renderCombosMarkup(comboObj)}
+                  </React.Fragment>
+                );
+              })}
+            </ShadowBox>
+          ) : null}
           {cartProductItems.length ? (
             <React.Fragment>
               {vegetables.length > 0 && (
-                <ShadowBox>
-                  <Text
+                <ShadowBox
+                  style={{
+                    padding: 0,
+                    marginTop: 12,
+                    backgroundColor: "#f1f1f1"
+                  }}
+                >
+                  <Title
                     style={{
                       textAlign: "center",
                       paddingVertical: 6,
                       fontWeight: "bold",
-                      fontSize: 16
+                      fontSize: 16,
+                      color: "blue"
                     }}
                   >
                     VEGETABLES
-                  </Text>
+                  </Title>
                   {vegetables.map(obj => {
                     return this.renderItemMarkup(obj);
                   })}
@@ -125,8 +168,8 @@ export class Cart extends React.Component {
               )}
 
               {groceries.length > 0 && (
-                <ShadowBox>
-                  <Text
+                <ShadowBox style={{ marginTop: 12 }}>
+                  <Title
                     style={{
                       textAlign: "center",
                       paddingVertical: 6,
@@ -135,29 +178,32 @@ export class Cart extends React.Component {
                     }}
                   >
                     GROCERIES
-                  </Text>
+                  </Title>
                   {groceries.map(obj => {
                     return this.renderItemMarkup(obj);
                   })}
                 </ShadowBox>
               )}
             </React.Fragment>
-          ) : (
+          ) : null}
+          {!comboItemsData.length && !cartProductItems.length ? (
             <View
               style={{
                 flex: 1,
                 alignItems: "center",
                 justifyContent: "center",
-                paddingTop:12
+                paddingTop: 12
               }}
             >
-              <Text style={{fontWeight:"bold", fontSize:16}}>Your Cart is Empty!</Text>
+              <Text style={{ fontWeight: "bold", fontSize: 16 }}>
+                Your Cart is Empty!
+              </Text>
             </View>
-          )}
+          ) : null}
         </ScrollView>
 
         <CheckoutBtn
-          fetchCurrentOrder={fetchCurrentOrder}
+          fetchCheckoutItems={fetchCheckoutItems}
           navigation={this.props.navigation}
           updatingProductId={this.props.updatingProductId}
           cartTotalAmount={parseInt(cartTotalAmount)}

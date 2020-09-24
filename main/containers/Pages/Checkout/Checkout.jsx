@@ -13,16 +13,20 @@ import { makePaymentMethods } from "./selectors";
 
 import { selectUserAddress } from "../ChangeAddress/selectors";
 
+import { placeOrder } from "./actions";
+
 const mapStateToProps = createStructuredSelector({
   cartDetailsObj: makeSelectCartItems(),
   isOrderApiFetching: makeSelectOrderApiFetching(),
   currentOrderAPIStatus: makeSelectOrderAPIStatus(),
   userAddress: selectUserAddress(),
-  paymentMethods: makePaymentMethods()
+  paymentMethods: makePaymentMethods(),
 });
 
 const mapDispatchToProps = dispatch => {
-  return {};
+  return {
+    submitCODOrder: data => dispatch(placeOrder(data)),
+  };
 };
 
 const withConnect = connect(

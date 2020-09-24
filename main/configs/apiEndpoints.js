@@ -15,5 +15,9 @@ export const apiEndPoints = {
   getUserAddress: "/secure-api/getUserAddress",
   getCombos: "/api/v1/getComboItems",
   getComboDetails: "/api/v1/getComboDetails",
-  addComboCart: "/api/addComboToCart"
+  addComboCart: "/api/addComboToCart",
+  removeCartComboItem: "/secure-api/v1/removeCartComboItem",
+  getEstimatedDelivery: "/secure-api/getEstimatedDelivery",
+  viewCheckout: "/secure-api/viewCheckout",
+  placeOrder: "/secure-api/v1/placeOrder"
 };

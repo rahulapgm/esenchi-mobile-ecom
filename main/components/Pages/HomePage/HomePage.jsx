@@ -38,12 +38,13 @@ export class HomePage extends React.Component {
           brandIcon={styles.brandIcon}
           brandTitle={styles.brandTitle}
           brandViewStyle={styles.brandViewStyle}
+          brandFontSize={14}
         />
 
         <TouchableOpacity
           onPress={() => this.props.navigation.toggleDrawer()}
           style={{
-            flex: 0.25,
+            flex: 0.2,
             justifyContent: "center",
             alignItems: "center",
             flexDirection: "column",
@@ -58,14 +59,14 @@ export class HomePage extends React.Component {
   render() {
     return (
       <React.Fragment>
-        <SafeAreaView style={{backgroundColor:"#fafafa"}}>
+        <SafeAreaView style={{}}>
           {this.renderHeader()}
           <View>
             <ProductSearch {...this.props} />
           </View>
           <ScrollView>
             <ProductCategoryTiles />
-            <Banner title="Min. order amount is 50Rs. Free delivery for orders above 100Rs." />
+            <Banner title="Min. order amount is 100Rs. Free delivery for orders above 150Rs." />
             <Banner title="Flat 10% off on online payment purchases." />
           </ScrollView>
         </SafeAreaView>
@@ -78,15 +79,14 @@ export default HomePage;
 
 const styles = StyleSheet.create({
   brandIcon: {
-    width: 48,
+    width: 32,
     height: 32,
-    resizeMode: "contain"
+    resizeMode: "contain",
+    position:"absolute",
+    bottom:24
   },
-  brandTitle: {},
   brandViewStyle: {
-    flex: 0.25,
-    flexDirection: "column",
-    justifyContent: "center",
-    alignItems: "center"
-  }
+    left: 16,
+    top:12
+  },
 });

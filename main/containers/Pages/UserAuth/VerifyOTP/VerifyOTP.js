@@ -1,10 +1,8 @@
 import React, { useState } from "react";
 import { compose } from "redux";
 import { connect } from "react-redux";
-// import { withNavigation } from "react-navigation";
 import { createStructuredSelector } from "reselect";
 
-import Loader from "../../../../hoc/Loader";
 import VerifyOTPComponent from "../../../../components/Pages/UserAuth/VerifyOTP/VerifyOTP";
 import toJS from "../../../../hoc/toJS";
 import {

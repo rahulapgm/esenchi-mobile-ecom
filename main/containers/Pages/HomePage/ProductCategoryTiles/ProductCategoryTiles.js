@@ -1,8 +1,6 @@
 import React from "react";
 import { compose } from "redux";
 import { connect } from "react-redux";
-// import { withNavigation } from "react-navigation";
-import { View, Text, Image } from "react-native";
 
 import ProductCategoryTilesComponent from "../../../../components/Pages/HomePage/ProductCategoryTiles";
 

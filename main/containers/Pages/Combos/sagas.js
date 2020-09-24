@@ -3,12 +3,13 @@ import { put, takeLatest, call } from "redux-saga/effects";
 import { fetchComboDetailsAction, fetchCombosAction, addComboCartAction } from "./actions";
 
 import triggerAPIRequest from "../../../utils/apiUtils";
-import { navigate } from "../../../../RootNavigation";
 
 export function* getCombos() {
   try {
-    const response = yield call(triggerAPIRequest, "getCombos", "GET");
-    yield put(fetchCombosAction.success(response.data));
+    const response = yield call(triggerAPIRequest, "getCombos", "POST", {comboCategory:""});
+    if(response && response.status === 200){
+      yield put(fetchCombosAction.success(response.data));
+    }
   } catch (error) {
     yield put(fetchCombosAction.failure());
   }
@@ -17,7 +18,9 @@ export function* getCombos() {
 export function* getComboDetails({ data }) {
   try {
     const response = yield call(triggerAPIRequest, "getComboDetails", "POST", data);
-    yield put(fetchComboDetailsAction.success(response.data));
+    if (response && response.status == 200) {
+      yield put(fetchComboDetailsAction.success(response.data));
+    }
   } catch (error) {
     yield put(fetchComboDetailsAction.failure());
   }
@@ -32,8 +35,10 @@ export function* addComboCart({ data }) {
       "POST",
       payload
     );
-    yield put(addComboCartAction.success(response.data));
-    navigate(routeName, { screen });
+    if(response && response.status == 200){
+      yield put(addComboCartAction.success(response.data));
+      navigate(routeName, { screen });
+    }
   } catch (error) {
     yield put(addComboCartAction.failure());
   }

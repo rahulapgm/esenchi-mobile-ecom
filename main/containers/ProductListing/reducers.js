@@ -17,10 +17,6 @@ export const productListReducers = (
       const { docs, isAllDocumentLoaded } = data;
       const prevProductList = state.get("productList");
       let producList = [...prevProductList, ...docs];
-
-      // console.log("producList reducer arry");
-      // console.log(producList);
-
       return state
         .set("productList", producList)
         .set("isAllDocumentLoaded", isAllDocumentLoaded);

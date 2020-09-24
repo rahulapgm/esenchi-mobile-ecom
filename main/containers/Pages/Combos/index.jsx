@@ -3,14 +3,16 @@ import { connect } from "react-redux";
 import { compose } from "redux";
 import { createStructuredSelector } from "reselect";
 import toJS from "../../../hoc/toJS/toJS";
-import { getComboState, getLoadingState, getComboDetailsState } from "./selectors";
+import {
+  getComboState,
+  getLoadingState,
+  getComboDetailsState
+} from "./selectors";
 import ComboComponent from "../../../components/Pages/Combos";
 import * as ACTIONS from "./actions";
 
 const Combos = props => {
-  return (
-    <ComboComponent {...props} />
-  );
+  return <ComboComponent {...props} />;
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -20,7 +22,7 @@ const mapStateToProps = createStructuredSelector({
 });
 
 const mapDispatchToProps = {
-  fetchCombos: ACTIONS.fetchCombosAction.request,
+  fetchCombos: ACTIONS.fetchCombosAction.request
 };
 
 const withConnect = connect(

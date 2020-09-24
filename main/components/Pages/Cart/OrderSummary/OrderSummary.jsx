@@ -1,18 +1,14 @@
 import React from "react";
 
 import { View, Text, TouchableOpacity } from "react-native";
-import { Paragraph, Title } from 'react-native-paper';
+import { Paragraph, Title } from "react-native-paper";
 import ShadowBox from "../../../../hoc/ShadowBox";
-
 import styles from "./styles";
 
 export const OrderSummary = ({
   cartTotalAmount,
   cartTotalSavings,
-  cartTotalMRPRate,
-  navigation,
-  userAddress="",
-  getUserAddress
+  cartTotalMRPRate
 }) => {
   return (
     <ShadowBox style={styles.container}>
@@ -20,29 +16,15 @@ export const OrderSummary = ({
 
       <View style={{ flexDirection: "column" }}>
         <Paragraph style={styles.totalAmtContainer}>
-          TOTAL AMOUNT:{" "}
+          TOTAL ORDER AMOUNT:{" "}
           <Text style={styles.mrpRateText}>{` ${cartTotalMRPRate} `}</Text>
-          <Text style={{color:'blue'}}>{`  ${cartTotalAmount}`} Rs.</Text>
+          <Text style={{ color: "blue" }}>{`  ${cartTotalAmount}`} Rs.</Text>
         </Paragraph>
         <Paragraph style={styles.savingMsgText}>
-          You saved <Text style={{color:"blue"}}>{cartTotalSavings} Rs.</Text>
+          You saved{" "}
+          <Text style={{ color: "blue" }}>{cartTotalSavings} Rs.</Text>
         </Paragraph>
       </View>
-
-      <Paragraph style={{ marginTop:12 }}>
-        Delivery address:
-        <Paragraph
-          style={styles.deliveryAddress}
-        >{` ${userAddress}`}</Paragraph>
-      </Paragraph>
-      <TouchableOpacity
-        onPress={() => {
-          getUserAddress();
-          navigation.navigate("ChangeAddress", {screen: "ChangeAddress", params:{ targetPage:"CartTab" } });
-        }}
-      >
-        <Paragraph style={styles.changeAddress}>Change Address</Paragraph>
-      </TouchableOpacity>
     </ShadowBox>
   );
 };

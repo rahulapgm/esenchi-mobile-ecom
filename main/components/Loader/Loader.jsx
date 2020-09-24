@@ -1,12 +1,12 @@
-import React from 'react';
+import React from "react";
 import { View, StyleSheet } from "react-native";
 
-import Lottie from 'lottie-react-native'
+import Lottie from "lottie-react-native";
 import singleWaveAnim from "../../../assets/loaders/singleWaveAnim.json";
 
 export default class Loader extends React.Component {
   state = {
-    animation: singleWaveAnim,
+    animation: singleWaveAnim
   };
 
   componentDidMount() {
@@ -16,7 +16,7 @@ export default class Loader extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        {this.state.animation &&
+        {this.state.animation && (
           <Lottie
             ref={animation => {
               this.animation = animation;
@@ -24,10 +24,11 @@ export default class Loader extends React.Component {
             style={{
               width: 400,
               height: 400,
-              backgroundColor: '#FFFFFF',
+              backgroundColor: "#FFFFFF"
             }}
             source={this.state.animation}
-          />}
+          />
+        )}
       </View>
     );
   }
@@ -44,10 +45,10 @@ export default class Loader extends React.Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex:0,
-    flexDirection:'row',
-    justifyContent: 'center',
-    position:'relative',
-    top:1,
+    flex: 0,
+    flexDirection: "row",
+    justifyContent: "center",
+    position: "relative",
+    top: 1
   }
-})
+});

@@ -64,17 +64,16 @@ export const ChangeAddress = props => {
 
   const hideDialog = () => setDialogVisiblity(false);
 
-  React.useEffect(() => {
+  const findGeoCoOrdinates = () => {
     if (!geoPoint) {
       navigator.geolocation.getCurrentPosition(
         position => {
           setUserGeoPoint(position);
         },
-        error => Alert.alert(error.message),
         { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 }
       );
     }
-  });
+  };
 
   const validateAddressObject = addressObj => {
     const errArray = [];
@@ -241,6 +240,7 @@ export const ChangeAddress = props => {
           onPress={() => {
             setSaveAddressBtnClicked(true);
             validateAddressObject(addressObj);
+            findGeoCoOrdinates();
           }}
         >
           {isUpdating ? (

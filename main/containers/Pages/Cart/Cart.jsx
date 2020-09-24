@@ -13,7 +13,9 @@ import {
   updateItemQuantity,
   removeCartItem,
   orderAPIFetching,
-  getPaymentMethods
+  getPaymentMethods,
+  removeCartComboItem,
+  getEstimatedDelivery
 } from "./actions";
 import {
   makeSelectCartItems,
@@ -21,19 +23,23 @@ import {
   makeSelectOrderApiFetching
 } from "./selectors";
 
-import { selectUserAddress } from '../ChangeAddress/selectors';
+import {
+  selectUserAddress,
+  selectEstimatedDelivery,
+  selectUserPincode
+} from "../ChangeAddress/selectors";
 
-import { getUserAddress } from '../ChangeAddress/actions';
+import { getUserAddress } from "../ChangeAddress/actions";
+import { viewCheckout } from "../Checkout/actions";
 
 export class Cart extends PureComponent {
   constructor(props) {
     super(props);
   }
 
-  componentDidMount(){
+  componentDidMount() {
     this._unsubscribe = this.props.navigation.addListener("focus", () => {
       this.onScreenFocus();
-
     });
   }
 
@@ -43,10 +49,6 @@ export class Cart extends PureComponent {
 
   onScreenFocus = () => {
     this.props.getAllPaymentMethods();
-    this.props.fetchCartItems();
-    if(!this.props.userAddress){
-      this.props.getUserAddress();
-    }
   };
 
   render() {
@@ -55,7 +57,7 @@ export class Cart extends PureComponent {
         <SkeletonComponent
           loadingState={this.props.isOrderApiFetching}
           mt={24}
-          text={"Few seconds away, we are loading your details"}
+          text={"Few seconds away, we are loading your order details"}
         />
       );
     }
@@ -69,7 +71,9 @@ const mapStateToProps = createStructuredSelector({
   cartDetailsObj: makeSelectCartItems(),
   updatingProductId: makeProductIdUpdating(),
   isOrderApiFetching: makeSelectOrderApiFetching(),
-  userAddress: selectUserAddress()
+  userAddress: selectUserAddress(),
+  userPincode: selectUserPincode(),
+  estimatedDelivery: selectEstimatedDelivery()
 });
 
 const mapDispatchToProps = dispatch => {
@@ -83,7 +87,9 @@ const mapDispatchToProps = dispatch => {
     },
     setOrderAPIFetchingState: data => dispatch(orderAPIFetching(data)),
     getUserAddress: () => dispatch(getUserAddress()),
-    getAllPaymentMethods: () => dispatch(getPaymentMethods())
+    getAllPaymentMethods: () => dispatch(getPaymentMethods()),
+    removeComboItem: data => dispatch(removeCartComboItem(data)),
+    fetchCheckoutItems: () => dispatch(viewCheckout())
   };
 };
 

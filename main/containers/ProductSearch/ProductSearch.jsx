@@ -5,9 +5,8 @@ import {
   StyleSheet,
   TextInput,
   TouchableOpacity,
-  View,
+  View
 } from "react-native";
-
 
 const ProductSearch = props => {
   const [searchValue, updateSearch] = useState();

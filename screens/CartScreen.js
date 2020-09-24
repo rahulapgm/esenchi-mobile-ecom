@@ -22,18 +22,3 @@ export const CartScreen = (props) => {
 
 export default CartScreen;
 
-
-
-// {
-// 	<Stack.Screen
-// 		name="ChangeAddress"
-// 		component={ChangeAddress}
-// 		options={{
-// 			headerTitle: "A D D R E S S",
-// 			headerTitleAlign: "center",
-// 			headerLeft: () => (
-// 				<HeaderBackButton navigation={navigation} targetPage="Cart" />
-// 			),
-// 		}}
-// 	/>
-// }

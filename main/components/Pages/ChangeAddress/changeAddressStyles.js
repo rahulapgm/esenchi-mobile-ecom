@@ -18,7 +18,7 @@ export const styles = StyleSheet.create({
     elevation: 5,
     margin: 24,
     padding: 6,
-    justifyContent:"center",
+    justifyContent: "center"
   }
 });
 

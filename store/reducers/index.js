@@ -8,7 +8,8 @@ import { loaderReducers as loader } from "../../main/hoc/Loader/reducer";
 import { productSearchReducers as productSearch } from "../../main/containers/ProductSearch/ProductSearchV2/reducers";
 import { productCartReducer as productCart } from "../../main/containers/ProductListing/Product/reducers";
 import { addressReducers as userAddressDetails } from "../../main/containers/Pages/ChangeAddress/reducers";
-import { combosReducer } from "../../main/containers/Pages/Combos/reducers";
+import { combosReducer as combos} from "../../main/containers/Pages/Combos/reducers";
+import { checkoutReducers as Checkout } from "../../main/containers/Pages/Checkout/reducers";
 
 export default combineReducers({
   loginReducer,
@@ -20,5 +21,6 @@ export default combineReducers({
   productCart,
   userAddressDetails,
   loader,
-  combos: combosReducer
+  combos,
+  Checkout
 });

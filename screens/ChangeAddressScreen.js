@@ -20,7 +20,7 @@ export const ChangeAddressScreen = props => {
             ? () => (
                 <HeaderBackButton
                   navigation={props.navigation}
-                  targetPage="HomeMain"
+                  targetPage="CartTab"
                 />
               )
             : null

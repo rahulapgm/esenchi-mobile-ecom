@@ -1,11 +1,11 @@
 import { put, takeLatest, delay } from "redux-saga/effects";
-import { SAVE_ADDRESS, GET_ADDRESS } from "./constants";
+import { SAVE_ADDRESS, GET_ADDRESS, GET_ESTIMATED_DELIVERY_TIME } from "./constants";
 
 import * as RootNavigation from "../../../../RootNavigation";
 
 import triggerAPIRequest from "../../../utils/apiUtils";
 import { showToastMsg } from "../../../hoc/Toast/actions";
-import { setAddress, setIsUpdating } from "./actions";
+import { setAddress, setIsUpdating, setEstimatedDelivery } from "./actions";
 
 export function* getAddress() {
   try {
@@ -16,10 +16,11 @@ export function* getAddress() {
         userAddress = "",
         userGeoPoint = [],
         userLandMark = "",
-        userName
+        userName,
+        estimatedDelivery
       } = response.data;
       yield put(
-        setAddress({userName, userAddress, userLandMark, userGeoPoint, userPincode })
+        setAddress({userName, userAddress, userLandMark, userGeoPoint, userPincode, estimatedDelivery })
       );
     }
   } catch (e) {
@@ -52,7 +53,7 @@ export function* updateAddress(actionObj) {
 
     if (response && response.status == 200) {
 
-      const { userName } = response.data;
+      const { userName, estimatedDelivery } = response.data;
 
       yield put(
         setAddress({
@@ -60,7 +61,8 @@ export function* updateAddress(actionObj) {
           userAddress,
           userLandMark,
           userGeoPoint,
-          userPincode: addressObj.pinCode
+          userPincode: addressObj.pinCode,
+          estimatedDelivery
         })
       );
 
@@ -77,9 +79,26 @@ export function* updateAddress(actionObj) {
   }
 }
 
+export function* getEstimatedDelivery(actionObj) {
+  const userPincode = actionObj && actionObj.data;
+  try {
+    const response = yield triggerAPIRequest("getEstimatedDelivery", "POST", { userPincode });
+    if (response && response.status === 200) {
+      const {
+        estimatedDelivery
+      } = response.data;
+      yield put(
+        setEstimatedDelivery(estimatedDelivery)
+      );
+    }
+  } catch (e) {
+  }
+}
+
 export function* watchForListRequest() {
   yield takeLatest(SAVE_ADDRESS, updateAddress);
   yield takeLatest(GET_ADDRESS, getAddress);
+  yield takeLatest(GET_ESTIMATED_DELIVERY_TIME, getEstimatedDelivery);
 }
 
 export default [watchForListRequest];

@@ -3,11 +3,19 @@ import { TouchableOpacity } from "react-native";
 
 import { MaterialCommunityIcons } from "react-native-vector-icons";
 
-export const HeaderBackButton = ({ navigation, targetPage = "App", onBackBtnPress = () => {}, iconSize= 26, btnStyle={} }) => {
+export const HeaderBackButton = ({
+  navigation,
+  targetPage = "App",
+  onBackBtnPress = () => {},
+  iconSize = 32,
+  btnStyle = {}
+}) => {
   return (
     <TouchableOpacity
       onPress={() => {
-        navigation.navigate(targetPage);
+        navigation.navigate("App", {
+          screen: targetPage
+        });
         onBackBtnPress();
       }}
       style={{

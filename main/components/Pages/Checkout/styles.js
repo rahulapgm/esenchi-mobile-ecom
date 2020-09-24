@@ -4,6 +4,7 @@ export const styles = StyleSheet.create({
   container: {
     flex: 1,
     flexDirection: "column",
-    padding: 12
+    padding: 0,
+    paddingBottom:0,
   }
 });

@@ -9,18 +9,15 @@ import { updateItemQuantity, removeOrderItem } from "./actions";
 
 import OrderItemComponent from "../../../../components/Pages/Cart/OrderItem/OrderItem";
 
-
 export const OrderItem = props => {
   return <OrderItemComponent {...props} />;
 };
 
-export const mapStateToProps = createStructuredSelector({
-
-});
+export const mapStateToProps = createStructuredSelector({});
 
 export const mapDispatchToProps = dispatch => {
   return {
-    setProductQuantity: data => dispatch(updateItemQuantity(data)),
+    setProductQuantity: data => dispatch(updateItemQuantity(data))
   };
 };
 

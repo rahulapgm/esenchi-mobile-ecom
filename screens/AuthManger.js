@@ -2,7 +2,6 @@ import React from "react";
 import {
   ActivityIndicator,
   AsyncStorage,
-  StatusBar,
   StyleSheet,
   View
 } from "react-native";
@@ -28,7 +27,6 @@ class AuthManager extends React.Component {
     return (
       <View>
         <ActivityIndicator />
-        <StatusBar barStyle="default" />
       </View>
     );
   }

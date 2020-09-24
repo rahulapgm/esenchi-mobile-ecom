@@ -40,12 +40,12 @@ class VerifyOTP extends React.Component {
             top: 12,
             padding:6
           }}
-          iconSize={32}
+          iconSize={42}
         />
 
         <View style={styles.container}>
 
-          <Brand brandIcon={styles.brandIcon} brandFontSize={24} brandViewStyle={styles.brandViewStyle}/>
+          <Brand brandIcon={styles.brandIcon} brandFontSize={28} brandViewStyle={styles.brandViewStyle}/>
           <Headline
             style={{ fontSize: 24, marginTop: 6, textAlign: "center" }}
           >

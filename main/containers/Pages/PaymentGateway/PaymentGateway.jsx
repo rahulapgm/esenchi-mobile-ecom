@@ -23,7 +23,6 @@ export const PaymentGateway = props => {
         /*
         callback function that will be executed once the transaction has been completed
         */
-       console.log(eventData);
       }}
       {...props}
     />

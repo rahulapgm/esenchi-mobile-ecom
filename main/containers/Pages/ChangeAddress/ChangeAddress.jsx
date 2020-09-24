@@ -4,9 +4,15 @@ import { createStructuredSelector } from "reselect";
 import ChangeAddress from "../../../components/Pages/ChangeAddress/ChangeAddress";
 import toJS from "../../../hoc/toJS/toJS";
 
-import {saveAddress} from './actions';
+import { saveAddress } from "./actions";
 
-import { selectUserPincode, selectUserLandMark, selectUserAddress, selectIsUpdating, selectUserName } from './selectors';
+import {
+  selectUserPincode,
+  selectUserLandMark,
+  selectUserAddress,
+  selectIsUpdating,
+  selectUserName
+} from "./selectors";
 
 const mapStateToProps = createStructuredSelector({
   userPincode: selectUserPincode(),
@@ -18,7 +24,7 @@ const mapStateToProps = createStructuredSelector({
 
 const mapDispatchToProps = dispatch => {
   return {
-    saveUserAddress: (data) => dispatch(saveAddress(data)),
+    saveUserAddress: data => dispatch(saveAddress(data))
   };
 };
 

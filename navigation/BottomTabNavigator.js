@@ -1,10 +1,14 @@
 import * as React from "react";
 import {createMaterialBottomTabNavigator} from "@react-navigation/material-bottom-tabs";
 import {MaterialCommunityIcons} from "react-native-vector-icons";
+import { connect } from "react-redux";
+import { compose } from "redux";
 
 import HomeScreen from "../screens/HomeScreen";
 import MyAccountScreen from "../screens/MyAccountScreen";
 import CartScreen from "../screens/CartScreen";
+import toJS from '../main/hoc/toJS/toJS';
+import {viewCartItems} from '../main/containers/Pages/Cart/actions';
 
 const BottomTab = createMaterialBottomTabNavigator();
 const INITIAL_ROUTE_NAME = "Home";
@@ -22,7 +26,7 @@ const config = {
 	},
 };
 
-export default function BottomTabNavigator({navigation}) {
+export function BottomTabNavigator({navigation, fetchCartItems}) {
 	// navigation.setOptions({ headerTitle: "rahul"});
 	return (
 		<BottomTab.Navigator
@@ -61,6 +65,7 @@ export default function BottomTabNavigator({navigation}) {
 						close: config,
 					},
 				}}
+				listeners={{ tabPress: () => fetchCartItems() }}
 			/>
 			<BottomTab.Screen
 				name="MyAccount"
@@ -85,11 +90,17 @@ export default function BottomTabNavigator({navigation}) {
 	);
 }
 
-// function getHeaderTitle(route) {
-//   const routeName = route.state?.routes[route.state.index]?.name ?? INITIAL_ROUTE_NAME;
+const mapStateToProps = () => {
+	return {};
+}
+const mapDispatchToProps = dispatch => {
+	return {
+		fetchCartItems: () => dispatch(viewCartItems()),
+	};
+}
+const withConnect = connect(
+  mapStateToProps,
+  mapDispatchToProps
+);
 
-//   switch (routeName) {
-//     case 'Links':
-//       return 'Links to learn more';
-//   }
-// }
+export default compose(withConnect)(toJS(BottomTabNavigator));

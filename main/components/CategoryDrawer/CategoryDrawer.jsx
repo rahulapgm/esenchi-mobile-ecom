@@ -18,7 +18,7 @@ export class CategoryDrawer extends React.PureComponent {
     };
   }
 
-  _handlePress = (categoryId) =>
+  _handlePress = categoryId =>
     this.setState({
       expandedCategoryId: categoryId
     });
@@ -48,7 +48,7 @@ export class CategoryDrawer extends React.PureComponent {
             }}
           >
             {categoryList &&
-              categoryList.map((item) => {
+              categoryList.map(item => {
                 return (
                   <ShadowBox
                     key={item.categoryId}
@@ -56,7 +56,9 @@ export class CategoryDrawer extends React.PureComponent {
                   >
                     <List.Accordion
                       title={item.categoryName}
-                      expanded={this.state.expandedCategoryId === item.categoryId}
+                      expanded={
+                        this.state.expandedCategoryId === item.categoryId
+                      }
                       onPress={() => {
                         if (this.state.expandedCategoryId === item.categoryId) {
                           this._handlePress(null);
@@ -71,19 +73,15 @@ export class CategoryDrawer extends React.PureComponent {
                             <TouchableOpacity
                               key={subCategoryItem}
                               onPress={() => {
-                                console.log("item", item);
                                 this.props.navigation.toggleDrawer();
                                 if (item.categoryName === "Combos") {
-                                  this.props.navigation.navigate(
-                                    "Combos",
-                                    {
-                                      screen: "CombosList",
-                                      params: {
-                                        categoryName: item.categoryName,
-                                        subCategoryItem
-                                      }
+                                  this.props.navigation.navigate("Combos", {
+                                    screen: "CombosList",
+                                    params: {
+                                      categoryName: item.categoryName,
+                                      subCategoryItem
                                     }
-                                  );
+                                  });
                                 } else {
                                   this.props.navigation.navigate(
                                     "ProductListing",

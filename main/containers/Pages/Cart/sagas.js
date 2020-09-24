@@ -1,10 +1,11 @@
-import { put, takeLatest, delay, select } from "redux-saga/effects";
+import { put, takeLatest } from "redux-saga/effects";
 
 import {
   VIEW_CART_ITEMS,
   UPDATE_CURRENT_ORDER,
   REMOVE_CART_ITEM,
-  GET_PAYMENT_METHODS
+  GET_PAYMENT_METHODS,
+  REMOVE_CART_COMBO_ITEM,
 } from "./constants";
 import {
   viewCartItemsSucess,
@@ -17,37 +18,36 @@ import {
 import { updateFetchingProductId } from "./OrderItem/actions";
 
 import triggerAPIRequest from "../../../utils/apiUtils";
-
-import { makeSelectOrderApiFetching } from "./selectors";
+import { VIEW_CHECKOUT } from "../Checkout/constants";
+import { showLoader, closeLoader } from "../../../hoc/Loader/actions";
 
 export function* fetchUserCartItems() {
-  const isOrderApiFetching = yield select(makeSelectOrderApiFetching());
-  if (!isOrderApiFetching) {
-    yield put(orderAPIFetching(true));
+  yield put(orderAPIFetching(true));
+  try{
     const response = yield triggerAPIRequest("viewCart", "POST",{});
     if (response && response.status == 200) {
       yield put(viewCartItemsSucess(response.data));
       yield put(orderAPIFetching(false));
     } else {
-      console.log(response.status);
       yield put(viewCartItemsError(response));
       yield put(orderAPIFetching(false));
     }
+  }
+  catch(e){
+    yield put(orderAPIFetching(false));
   }
 }
 
 export function* updateOrder() {
   try {
     yield put(orderAPIFetching(true));
-    const response = yield triggerAPIRequest("updateOrder", "POST", data);
-    if (response && response.status == 200) {
+    const response = yield triggerAPIRequest("updateOrder", "POST", {});
+    if (response && response.status === 200) {
       yield put(
         updateOrderAPIStatus({ status: "success", message: "success" })
       );
-      yield put(orderAPIFetching(false));
       yield put(viewCartItemsSucess(response.data));
     } else {
-      yield put(orderAPIFetching(false));
       yield put(
         updateOrderAPIStatus({
           status: "failed",
@@ -57,7 +57,6 @@ export function* updateOrder() {
       );
     }
   } catch (e) {
-    yield put(orderAPIFetching(false));
     yield put(
       updateOrderAPIStatus({
         status: "failed",
@@ -65,6 +64,7 @@ export function* updateOrder() {
       })
     );
   }
+  yield put(orderAPIFetching(false));
 }
 
 export function* removeProductFromCart(actionObj) {
@@ -96,15 +96,13 @@ export function* removeProductFromCart(actionObj) {
 export function* getAllPaymentMethods(){
 
   const fallbackPaymentMethods = [
-    { type: "UPI", icon: "contactless-payment", selected: true },
-    { type: "Google Pay", icon: "google", selected: false },
-    { type: "Credit/Debit/ATM Card", icon: "credit-card", selected: false },
+    { type: "Cash On Delivery", icon: "cash", selected: false }
   ];
 
   try {
     const response = yield triggerAPIRequest("getPaymentMethods");
-    if (response && response.status == 200) {
-      const paymentMethods  = response.data;
+    if (response && response.status === 200 && response.data && response.data.paymentMethods) {
+      const paymentMethods  = response.data.paymentMethods;
       yield put(setPaymentMethods(paymentMethods));
     } else {
       yield put(setPaymentMethods(fallbackPaymentMethods));
@@ -114,11 +112,54 @@ export function* getAllPaymentMethods(){
   }
 }
 
+export function* removeCartComboItem(actionObj){
+  const comboId = actionObj && actionObj.data;
+  try {
+    yield put(updateFetchingProductId(comboId));
+    const response = yield triggerAPIRequest("removeCartComboItem", "POST", {
+      comboId
+    });
+    if (response && response.status == 200) {
+      yield put(viewCartItemsSucess(response.data));
+      yield put(updateFetchingProductId(""));
+    } else {
+      yield put(viewCartItemsError(response));
+      yield put(updateFetchingProductId(""));
+    }
+  } catch (e) {
+    yield put(orderAPIFetching(false));
+    yield put(
+      updateOrderAPIStatus({
+        status: "failed",
+        message: "Sorry, An Error Occured. Our team will fix this issue soon.."
+      })
+    );
+  }
+}
+
+export function* fetchUserCheckoutItems() {
+  yield put(showLoader());
+  try{
+    const response = yield triggerAPIRequest("viewCheckout", "POST",{});
+    if (response && response.status == 200) {
+      yield put(viewCartItemsSucess(response.data));
+    } else {
+      yield put(viewCartItemsError(response));
+    }
+    yield put(closeLoader());
+  }
+  catch(e){
+    yield put(closeLoader());
+  }
+}
+
 export function* watchForListRequest() {
   yield takeLatest(VIEW_CART_ITEMS, fetchUserCartItems);
   yield takeLatest(UPDATE_CURRENT_ORDER, updateOrder);
   yield takeLatest(REMOVE_CART_ITEM, removeProductFromCart);
   yield takeLatest(GET_PAYMENT_METHODS, getAllPaymentMethods);
+  yield takeLatest(REMOVE_CART_COMBO_ITEM, removeCartComboItem);
+  yield takeLatest(VIEW_CHECKOUT, fetchUserCheckoutItems);
 }
 
 export default [watchForListRequest];

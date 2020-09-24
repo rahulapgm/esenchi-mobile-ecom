@@ -13,7 +13,6 @@ export const ComboDetailScreen = (props) => {
         name="ComboDetail"
         component={ComboDetail}
         options={({ route }) => {
-          console.log("route", route);
           return {
             title: route.params.name || "C O M B O  V I E W",
             headerTitleAlign: "center",

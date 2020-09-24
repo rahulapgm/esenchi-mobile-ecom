@@ -4,16 +4,26 @@ import { View, Text, TouchableOpacity } from "react-native";
 
 import { MaterialCommunityIcons } from "react-native-vector-icons";
 
-import { Card, Checkbox, IconButton, List } from "react-native-paper";
+import { Title } from "react-native-paper";
 import Heading from "../../../custom/Heading/Heading";
 import ShadowBox from "../../../../hoc/ShadowBox";
 
 export const Payment = props => {
-  const [checked, setChecked] = React.useState(0);
-  const {paymentMethods = []} = props;
+  let {paymentMethods = [], setPaymentMethod} = props;
+  const currentPaymentMethod = paymentMethods.findIndex(item => item.selected === true) || 0;
+
+  const [checked, setChecked] = React.useState(currentPaymentMethod);
+
+  const fallbackPaymentMethods = [
+    { type: "Cash On Delivery", icon: "cash", selected: false }
+  ];
+  if(!paymentMethods.length){
+    paymentMethods = fallbackPaymentMethods;
+  }
+
   return (
-    <View style={{ marginBottom: 24 }}>
-      <Heading type="h2">PAYMENT</Heading>
+    <ShadowBox>
+      <Title style={{padding:6, fontSize:24}}>PAYMENT</Title>
       {paymentMethods.map((item, index) => {
         const SelectedCheck =
           checked === index
@@ -25,34 +35,18 @@ export const Payment = props => {
                   size={26}
                 />
               )
-            : props => <React.Fragment></React.Fragment>;
+            : () => <React.Fragment></React.Fragment>;
         return (
           <TouchableOpacity
             key={index}
             onPress={() => {
               setChecked(index);
+              setPaymentMethod(paymentMethods[index])
             }}
           >
             <ShadowBox style={checked === index
                     ? { flex:1, flexDirection:"row", alignItems:"center",backgroundColor: "#304FFE", color: "white"}
                     : {flex:1, flexDirection:"row", alignItems:"center"}}>
-              {/* <Card.Title
-                title={item.type}
-                right={props => <SelectedCheck {...props} />}
-                left={props => (
-                  <MaterialCommunityIcons
-                    {...props}
-                    name={item.icon}
-                    style={checked === index ? { color: "white" } : {}}
-                  />
-                )}
-                style={
-                  checked === index
-                    ? { backgroundColor: "#304FFE", color: "white"}
-                    : {}
-                }
-                titleStyle={checked === index ? { color: "white" } : {}}
-              /> */}
               <MaterialCommunityIcons
                     {...props}
                     name={item.icon}
@@ -69,7 +63,7 @@ export const Payment = props => {
           </TouchableOpacity>
         );
       })}
-    </View>
+    </ShadowBox>
   );
 };
 
@@ -85,3 +79,21 @@ export default Payment;
 //    }
 //  }/>
 // }}
+
+// {/* <Card.Title
+//   title={item.type}
+//   right={props => <SelectedCheck {...props} />}
+//   left={props => (
+//     <MaterialCommunityIcons
+//       {...props}
+//       name={item.icon}
+//       style={checked === index ? { color: "white" } : {}}
+//     />
+//   )}
+//   style={
+//     checked === index
+//       ? { backgroundColor: "#304FFE", color: "white"}
+//       : {}
+//   }
+//   titleStyle={checked === index ? { color: "white" } : {}}
+// /> */}

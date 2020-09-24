@@ -7,6 +7,8 @@ import ShimmerPlaceHolder from "react-native-shimmer-placeholder";
 
 import Dropdown from "../../../custom/Dropdown/Dropdown";
 import ShadowBox from "../../../../hoc/ShadowBox";
+import { styles as commonStyles } from "../../../common/styles";
+import { Subheading, Headline } from "react-native-paper";
 
 export const OrderItem = props => {
   const {
@@ -14,7 +16,8 @@ export const OrderItem = props => {
     productImgUrl,
     productName,
     pricingDetails = [],
-    selectedPricingSkuIndex = ""
+    selectedPricingSkuIndex = "",
+    productMalayalamName = ""
   } = props.product || {};
 
   const { updatingProductId = "" } = props;
@@ -61,7 +64,7 @@ export const OrderItem = props => {
         <View
           style={{
             flexDirection: "column",
-            flex: 0.36,
+            flex: 0.4,
             alignItems: "center",
             justifyContent: "center"
           }}
@@ -74,34 +77,40 @@ export const OrderItem = props => {
           />
         </View>
         <View
-          style={{ flexDirection: "column", flex: 1, paddingHorizontal: 12 }}
+          style={{ flexDirection: "column", flex: 1, paddingHorizontal: 6 }}
         >
           <View
             style={{
               flexDirection: "row",
-              flex: 1,
-              paddingVertical: 6
+              flex: 1
             }}
           >
-            <Text
+            <View
               style={{
                 flex: 1,
+                flexDirection: "column",
                 justifyContent: "flex-start",
-                alignItems: "flex-start",
-                fontSize: 16,
-                fontWeight: "bold"
+                alignItems: "flex-start"
               }}
             >
-              {productName}
-            </Text>
+              <Headline
+                style={{
+                  fontSize: 16,
+                  fontWeight: "bold"
+                }}
+              >
+                {productName}
+                {`${productMalayalamName ? ` (${productMalayalamName})` : ""}`}
+              </Headline>
+            </View>
 
             <TouchableOpacity
               onPress={() => {
                 alertOnRemove(props.product);
               }}
               style={{
-                justifyContent: "flex-end",
-                alignItems: "flex-end",
+                justifyContent: "flex-start",
+                alignItems: "center",
                 fontSize: 16,
                 fontWeight: "bold",
                 color: "blue"
@@ -122,7 +131,7 @@ export const OrderItem = props => {
                 paddingVertical: 6
               }}
             >
-              <Text style={{ color: "blue" }}>
+              <Subheading style={{ ...commonStyles.price, fontSize: 12 }}>
                 {`Selling Price: ${sellingPrice} Rs. `}
                 <Text
                   style={{
@@ -131,9 +140,9 @@ export const OrderItem = props => {
                     textDecorationStyle: "solid"
                   }}
                 >
-                  MRP. {mrpRate}
+                  {mrpRate} Rs.
                 </Text>
-              </Text>
+              </Subheading>
             </View>
           )}
 

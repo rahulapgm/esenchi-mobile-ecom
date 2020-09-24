@@ -28,24 +28,6 @@ export const HomeScreen = ({ navigation }) => {
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    flexDirection: "row"
-  },
-  brandIcon: {
-    flex: 1,
-    width: 48,
-    resizeMode: "contain"
-  },
-  brandTitle: { flex: 0.5, marginHorizontal: 2 },
-  brandViewStyle: {
-    marginHorizontal: 12,
-    paddingVertical: 6,
-    position: "relative"
-  }
-});
-
 const Drawer = createDrawerNavigator();
 
 export const homeWithCategoryNavigator = () => {
@@ -72,36 +54,3 @@ export const homeWithCategoryNavigator = () => {
 };
 
 export default homeWithCategoryNavigator;
-
-// export const HomeScreen = ({ navigation }) => {
-//   return (
-//     <View style={styles.container}>
-//       <Suspense fallback={<View></View>}>
-//         <HomePageLazy {...this.props} />
-//       </Suspense>
-//     </View>
-//   );
-// };
-
-// headerTitle: props => <ProductSearch {...props} />,
-// headerLeft: props => (
-//   <Brand
-//     {...props}
-//     brandIcon={styles.brandIcon}
-//     brandTitle={styles.brandTitle}
-//     brandViewStyle={styles.brandViewStyle}
-//   />
-// ),
-// headerRight: props => (
-//   <TouchableOpacity
-//     onPress={() => navigation.toggleDrawer()}
-//     style={{
-//       color: "#0099ff",
-//       backgroundColor: "white",
-//       fontSize: 20,
-//       paddingHorizontal: 26
-//     }}
-//   >
-//     <MaterialCommunityIcons name="menu" size={36} />
-//   </TouchableOpacity>
-// )

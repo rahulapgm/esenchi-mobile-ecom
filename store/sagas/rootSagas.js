@@ -10,6 +10,7 @@ import productSagas from '../../main/containers/ProductListing/Product/sagas';
 import productSearchSagas from '../../main/containers/ProductSearch/ProductSearchV2/sagas';
 import userAddressSagas from '../../main/containers/Pages/ChangeAddress/sagas';
 import comboSagas from "../../main/containers/Pages/Combos/sagas";
+import checkoutSagas from "../../main/containers/Pages/Checkout/sagas";
 
 export const runSagas = (sagas) => {
 	if (Array.isArray(sagas)) {
@@ -32,7 +33,8 @@ export const allSagas = () => [
 	...runSagas(productSagas),
 	...runSagas(productSearchSagas),
 	...runSagas(userAddressSagas),
-	...runSagas(comboSagas)
+	...runSagas(comboSagas),
+	...runSagas(checkoutSagas)
 ];
 
 export default function* rootSaga() {

@@ -5,13 +5,13 @@ export const styles = StyleSheet.create({
   titleStyle: {
     flex: 1,
     textAlign: "center",
-    paddingVertical: 6,
+    paddingVertical: 6
   },
   totalAmtContainer: {
     flex: 1,
     textAlign: "left",
     fontWeight: "bold",
-    fontSize: 14,
+    fontSize: 14
   },
   mrpRateText: {
     color: "#260505",
@@ -31,6 +31,5 @@ export const styles = StyleSheet.create({
   },
   changeAddress: { color: "#1a75ff", textDecorationLine: "underline" }
 });
-
 
 export default styles;

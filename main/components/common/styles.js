@@ -9,10 +9,8 @@ export const styles = StyleSheet.create({
   price: {
     alignItems: "flex-start",
     color: "blue",
-    fontSize: 18,
-    fontWeight: "bold",
-    position: "relative",
-    padding: 6
+    fontSize: 16,
+    fontWeight: "bold"
   },
   row: {
     flexDirection: "row",
