@@ -6,7 +6,12 @@ import ShadowBox from "../../../hoc/ShadowBox";
 import { styles } from "../Checkout/OrderReview/styles";
 
 export const OrderConfirmation = props => {
-  const { navigation, placedOrderData, showOrderDetail, setOrderDetailVisibility } = props;
+  const {
+    navigation,
+    placedOrderData,
+    showOrderDetail,
+    setOrderDetailVisibility
+  } = props;
   const {
     orderId,
     orderOTP,
@@ -27,21 +32,6 @@ export const OrderConfirmation = props => {
     >
       <ScrollView style={{ height: "100%" }}>
         <SafeAreaView>
-        <Button
-        icon={() => (
-          <MaterialCommunityIcons size={20} name="home-circle" color="blue" />
-        )}
-        iconSize={48}
-        mode="text"
-        onPress={() => {
-          setOrderDetailVisibility(false);
-          navigation.navigate("App", {
-            screen: "Home"
-          });
-        }}
-      >
-        <Text>Go Back To Store</Text>
-      </Button>
           <ShadowBox style={{ paddingHorizontal: 24 }}>
             <View
               style={{ flexDirection: "row", justifyContent: "space-between" }}
@@ -134,6 +124,26 @@ export const OrderConfirmation = props => {
               );
             })}
           </ShadowBox>
+          <Button
+            style={{marginVertical:16}}
+            icon={() => (
+              <MaterialCommunityIcons
+                size={20}
+                name="home-circle"
+                color="blue"
+              />
+            )}
+            iconSize={48}
+            mode="text"
+            onPress={() => {
+              setOrderDetailVisibility(false);
+              navigation.navigate("App", {
+                screen: "Home"
+              });
+            }}
+          >
+            <Text>Go Back To Store</Text>
+          </Button>
         </SafeAreaView>
       </ScrollView>
     </Modal>
