@@ -12,13 +12,18 @@ import {
   updateCurrentOrder,
   updateItemQuantity,
   removeCartItem,
-  orderAPIFetching
+  orderAPIFetching,
+  getPaymentMethods
 } from "./actions";
 import {
   makeSelectCartItems,
   makeProductIdUpdating,
   makeSelectOrderApiFetching
 } from "./selectors";
+
+import { selectUserAddress } from '../ChangeAddress/selectors';
+
+import { getUserAddress } from '../ChangeAddress/actions';
 
 export class Cart extends PureComponent {
   constructor(props) {
@@ -28,6 +33,7 @@ export class Cart extends PureComponent {
   componentDidMount(){
     this._unsubscribe = this.props.navigation.addListener("focus", () => {
       this.onScreenFocus();
+
     });
   }
 
@@ -36,7 +42,11 @@ export class Cart extends PureComponent {
   }
 
   onScreenFocus = () => {
+    this.props.getAllPaymentMethods();
     this.props.fetchCartItems();
+    if(!this.props.userAddress){
+      this.props.getUserAddress();
+    }
   };
 
   render() {
@@ -58,7 +68,8 @@ export class Cart extends PureComponent {
 const mapStateToProps = createStructuredSelector({
   cartDetailsObj: makeSelectCartItems(),
   updatingProductId: makeProductIdUpdating(),
-  isOrderApiFetching: makeSelectOrderApiFetching()
+  isOrderApiFetching: makeSelectOrderApiFetching(),
+  userAddress: selectUserAddress()
 });
 
 const mapDispatchToProps = dispatch => {
@@ -70,7 +81,9 @@ const mapDispatchToProps = dispatch => {
     removeCartProductItem: productId => {
       dispatch(removeCartItem(productId));
     },
-    setOrderAPIFetchingState: data => dispatch(orderAPIFetching(data))
+    setOrderAPIFetchingState: data => dispatch(orderAPIFetching(data)),
+    getUserAddress: () => dispatch(getUserAddress()),
+    getAllPaymentMethods: () => dispatch(getPaymentMethods())
   };
 };
 

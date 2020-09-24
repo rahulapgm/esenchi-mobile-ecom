@@ -36,7 +36,7 @@ export const Checkout = props => {
   }
   return (
     <ShadowBox style={styles.container}>
-      <ScrollView>
+      <ScrollView style={{backgroundColor:"white"}}>
         <Payment {...props} />
         <OrderReview productItems={cartProductItems} {...props} />
       </ScrollView>
@@ -53,19 +53,21 @@ export const Checkout = props => {
         <Text
           style={{
             flex: 5,
-            fontSize: 16,
-            textAlign: "center",
-            color: "#0046FF",
-            fontWeight: "bold",
-            borderRadius: 5
+            fontSize: 20,
+            borderRadius: 5,
           }}
         >
-          <Text style={{ color: "#0046FF", fontWeight: "bold" }}>Total Amount: </Text>
-          {` ₹ ${cartTotalAmount} `}
+          <Text style={{ flex: 4, color: "#0046FF", fontWeight: "bold", textAlign:"center" }}>
+            Total Amount:
+          </Text>
+          <Text style={{ flex: 1, color: "#0046FF", fontWeight: "bold" }}>
+            {` Rs ${cartTotalAmount} `}
+          </Text>
+
         </Text>
         <Button
           onPress={() => {
-            props.navigation.navigate("Checkout");
+            props.navigation.navigate("PaymentGatewayScreen", {screen:"PaymentScreen"});
           }}
           isGradient={true}
           gradStart={[0, 0.5]}

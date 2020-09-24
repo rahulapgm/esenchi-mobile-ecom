@@ -2,10 +2,9 @@ import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
   expandedView: {
-    flex: 1,
+    flex:1,
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: "white"
   },
   optionListView: {
     position: "absolute",
@@ -27,7 +26,7 @@ export const styles = StyleSheet.create({
     margin: 6
   },
   optionText: {
-    fontSize: 16,
+    fontSize: 14,
     fontWeight: "bold",
     color: "#2e5ef0",
     textAlign: "center"
@@ -49,19 +48,32 @@ export const styles = StyleSheet.create({
     flex: 1,
     flexDirection: "row",
     alignItems: "center",
-    justifyContent: "center"
+    justifyContent: "center",
+    padding:2,
   },
   collapseButtonText: {
-    flex: 0.8,
-    fontSize: 12,
-    fontWeight: "bold"
+    flex: 1,
+    fontWeight: "bold",
+    paddingLeft:2
   },
   upDownArrowIcon: {
-    flex: 0.1,
     height: 32,
     width: 32,
     justifyContent: "flex-end",
     resizeMode: "center"
+  },
+  productName: {
+    fontSize: 14,
+    fontWeight: "bold",
+    color: "black",
+    textAlign: "center",
+    backgroundColor: "white",
+    borderRadius: 8,
+    shadowOffset: { width: 3, height: 3 },
+    shadowOpacity: 1.0,
+    elevation: 5,
+    padding: 8,
+    margin: 6
   }
 });
 

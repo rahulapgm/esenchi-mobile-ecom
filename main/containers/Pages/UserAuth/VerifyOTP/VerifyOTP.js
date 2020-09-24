@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { compose } from "redux";
 import { connect } from "react-redux";
 // import { withNavigation } from "react-navigation";
-import { AsyncStorage } from "react-native";
 import { createStructuredSelector } from "reselect";
 
 import Loader from "../../../../hoc/Loader";
@@ -10,37 +9,25 @@ import VerifyOTPComponent from "../../../../components/Pages/UserAuth/VerifyOTP/
 import toJS from "../../../../hoc/toJS";
 import {
   makeSelectLoginDataFetched,
-  makeSelectIsFetching,
   makeSelectUserLoginData,
-  makeSelectLoginErrors
+  makeSelectLoginErrors,
+  makeSelectIncorrectOTPError
 } from "../selectors";
 
-import { validateOTP } from "../actions";
+import { validateOTP, setInCorrectOTP } from "../actions";
 
 class VerifyOTP extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      userToken: AsyncStorage.getItem("userToken"),
-      isFetching: this.props.isFetching
-    };
+    this.state = {};
   }
   _signInAsync = async () => {
     // this.props.navigation.navigate("App");
   };
-  componentDidUpdate(prevProps, nextProps) {
-    if (prevProps.loginDataFetched && this.state.userToken) {
-      // this.props.navigation.navigate("App");
-    }
-  }
+
   render() {
-    const { isFetching } = this.props;
     return (
-      <Loader showLoader={isFetching}>
-        {!this.props.loginDataFetched && this.state.userToken && (
-          <VerifyOTPComponent signInUser={this._signInAsync} {...this.props} />
-        )}
-      </Loader>
+      <VerifyOTPComponent signInUser={this._signInAsync} {...this.props} />
     );
   }
 }
@@ -49,13 +36,14 @@ const mapStateToProps = state =>
   createStructuredSelector({
     loginDataFetched: makeSelectLoginDataFetched(),
     userLoginData: makeSelectUserLoginData(),
-    isFetching: makeSelectIsFetching(),
-    isError: makeSelectLoginErrors()
+    isError: makeSelectLoginErrors(),
+    inCorrectOTP: makeSelectIncorrectOTPError()
   });
 
 const mapDispatchToProps = dispatch => {
   return {
-    invokeOTPValidation: userData => dispatch(validateOTP(userData))
+    invokeOTPValidation: userData => dispatch(validateOTP(userData)),
+    setInCorrectOTPValue: data => dispatch(setInCorrectOTP(data))
   };
 };
 const withConnect = connect(

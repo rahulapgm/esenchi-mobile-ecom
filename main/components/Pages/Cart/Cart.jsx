@@ -101,6 +101,7 @@ export class Cart extends React.Component {
             cartTotalAmount={cartTotalAmount}
             cartTotalSavings={cartTotalSavings}
             cartTotalMRPRate={cartTotalMRPRate}
+            {...this.props}
           />
 
           {cartProductItems.length ? (

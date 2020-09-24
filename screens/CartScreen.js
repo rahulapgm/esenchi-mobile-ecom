@@ -1,20 +1,10 @@
 import React, {Suspense, lazy} from "react";
 import {createStackNavigator} from "@react-navigation/stack";
 import CartPage from "../main/containers/Pages/Cart";
-import ChangeAddress from "../main/containers/Pages/ChangeAddress";
-
-import HeaderBackButton from "../main/components/custom/HeaderBackButton";
 
 const Stack = createStackNavigator();
 
-export const CartScreen = ({navigation}) => {
-	React.useEffect(() => {
-		const unsubscribe = navigation.addListener("focus", () => {
-			// do something
-		});
-
-		return unsubscribe;
-	}, [navigation]);
+export const CartScreen = (props) => {
 	return (
 		<Stack.Navigator>
 			<Stack.Screen
@@ -26,21 +16,24 @@ export const CartScreen = ({navigation}) => {
 					headerLeft: null
 				}}
 			/>
-			{
-				<Stack.Screen
-					name="ChangeAddress"
-					component={ChangeAddress}
-					options={{
-						headerTitle: "A D D R E S S",
-						headerTitleAlign: "center",
-						headerLeft: () => (
-							<HeaderBackButton navigation={navigation} targetPage="Cart" />
-						),
-					}}
-				/>
-			}
 		</Stack.Navigator>
 	);
 };
 
 export default CartScreen;
+
+
+
+// {
+// 	<Stack.Screen
+// 		name="ChangeAddress"
+// 		component={ChangeAddress}
+// 		options={{
+// 			headerTitle: "A D D R E S S",
+// 			headerTitleAlign: "center",
+// 			headerLeft: () => (
+// 				<HeaderBackButton navigation={navigation} targetPage="Cart" />
+// 			),
+// 		}}
+// 	/>
+// }

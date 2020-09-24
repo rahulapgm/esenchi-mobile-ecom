@@ -2,7 +2,6 @@ import {
   GET_PRODUCTS_ON_CATEGORY,
   SET_PRODUCTS_ON_CATEGORY,
   FETCH_ERROR_PRODCUT_LISTING,
-  ADD_PRODUCT_TO_CART,
   GET_PRODUCTS_ON_SCROLL,
   CLEAR_ALL_PRODUCTS_FROM_STORE,
   SHOW_PRODUCT_LIST_LOADER
@@ -29,13 +28,6 @@ export const fetchErrorOnProductCategory = (data) => {
   }
 }
 
-
-export const addProductToCart = (data) => {
-	return {
-		type: ADD_PRODUCT_TO_CART,
-		data
-	}
-}
 
 export const getProductsListOnScroll = () => {
   return {

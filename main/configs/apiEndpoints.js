@@ -1,13 +1,19 @@
 export const apiEndPoints = {
-  addproduct: "/api/product/add-product",
   authenticate: "/api/authenticate",
   loginUser: "/api/loginUser",
   getProducts: "/api/products",
-  viewCart: "/api/temp/viewCart",
-  removeCartItem: "/api/v1/removeCartItem",
-  updateOrder: "/api/temp/viewCart",
-  updateProductQuantity: "/api/v1/updateProductQuantity",
-  addCartItem: "/api/temp/addCartItem",
   getCategoryList: "/api/v1/getCategoryList",
-  searchProducts: "/api/query/v1/searchProducts"
+  searchProducts: "/api/query/v1/searchProducts",
+  searchSuggestions: "/api/query/v1/searchSuggestions",
+  getPaymentMethods: "/secure-api/v1/getPaymentMethods",
+  viewCart: "/secure-api/viewCart",
+  removeCartItem: "/secure-api/v1/removeCartItem",
+  updateOrder: "/secure-api/viewCart",
+  updateProductQuantity: "/secure-api/v1/updateProductQuantity",
+  addCartItem: "/secure-api/addCartItem",
+  saveAddress: "/secure-api/saveAddress",
+  getUserAddress: "/secure-api/getUserAddress",
+  getCombos: "/api/v1/getComboItems",
+  getComboDetails: "/api/v1/getComboDetails",
+  addComboCart: "/api/addComboToCart"
 };

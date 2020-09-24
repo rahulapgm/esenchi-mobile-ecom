@@ -1,0 +1,2 @@
+export const CLOSE_LOADER = "LOADER/CLOSE_LOADER";
+export const SHOW_LOADER = "LOADER/SHOW_LOADER";

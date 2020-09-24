@@ -17,7 +17,14 @@ export class CategoryTile extends React.Component {
         style={styles.container}
         activeOpacity={0.5}
         onPress={() => {
-          RootNavigation.navigate("App");
+          RootNavigation.navigate("ProductListing", {
+            screen: "CategoryListing",
+            params: {
+              pageType:"categoryLanding",
+              categoryName: item.title,
+              subCategoryItem: item.title
+            }
+          });
         }}
       >
         <Image style={{ width: 48, height: 48 }} source={{ uri: icon }} />

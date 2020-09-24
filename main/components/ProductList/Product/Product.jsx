@@ -77,7 +77,7 @@ const Product = props => {
           </Text>
         </Text> */}
 
-        <TouchableOpacity onPress={()=>{addToCart({productId, selectedPricingSkuIndex})}} style={styles.addToCartBtn}>
+        <TouchableOpacity onPress={()=>{addToCart({productId, selectedPricingSkuIndex, productName})}} style={styles.addToCartBtn}>
           <Text style={styles.addToCartBtnText}>ADD TO CART</Text>
         </TouchableOpacity>
       </View>

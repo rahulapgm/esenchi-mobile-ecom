@@ -7,7 +7,8 @@ export const Dropdown = props => {
   const {
     optionsList = [{}],
     currentOption = {},
-    callbackForUpdate = () => {}
+    callbackForUpdate = () => {},
+    productName
   } = props;
   const { displayLabel = "Label Missing" } = currentOption;
   const [clicked, changeView] = useState(false);
@@ -15,8 +16,15 @@ export const Dropdown = props => {
   if (clicked) {
     return (
       <View style={styles.expandedView}>
-        <Modal isVisible={clicked} animationType="slide" transparent={true}>
+        <Modal
+          isVisible={clicked}
+          animationType="slide"
+          transparent={true}
+          onDismiss={toggleView}
+          onRequestClose={toggleView}
+          >
           <View style={styles.optionListView}>
+            {productName && (<Text style={styles.productName}>Product: {productName}</Text>) }
             {optionsList.map((option, index) => {
               return (
                 <TouchableOpacity
@@ -50,7 +58,7 @@ export const Dropdown = props => {
           </Text>
           <Image
             style={styles.upDownArrowIcon}
-            source={require("../../../../assets/icons/dropdown00003.png")}
+            source={require("../../../../assets/icons/dropdown00001.png")}
           />
         </TouchableOpacity>
       </View>

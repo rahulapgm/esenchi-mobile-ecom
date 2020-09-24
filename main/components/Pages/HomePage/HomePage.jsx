@@ -11,7 +11,6 @@ import {
 import { MaterialCommunityIcons } from "react-native-vector-icons";
 
 import ProductCategoryTiles from "../../../containers/Pages/HomePage/ProductCategoryTiles";
-import PLP from "../../../containers/PLP";
 import ProductSearch from "../../../containers/ProductSearch/ProductSearchV2/ProductSearchV2";
 import Banner from "../../common/Banner/Banner";
 import Brand from "../../common/Brand/Brand";
@@ -27,7 +26,7 @@ export class HomePage extends React.Component {
       <ShadowBox
         style={{
           flexDirection: "row",
-          justifyContent: "center",
+          justifyContent: "space-between",
           alignItems: "center",
           padding: 0,
           margin: 0,
@@ -40,9 +39,6 @@ export class HomePage extends React.Component {
           brandTitle={styles.brandTitle}
           brandViewStyle={styles.brandViewStyle}
         />
-        <View style={{ flex: 0.5 }}>
-          <ProductSearch />
-        </View>
 
         <TouchableOpacity
           onPress={() => this.props.navigation.toggleDrawer()}
@@ -54,7 +50,7 @@ export class HomePage extends React.Component {
           }}
         >
           <MaterialCommunityIcons name="menu" size={36} />
-          <Text style={{fontSize:12}}>Categories</Text>
+          <Text style={{ fontSize: 12 }}>Categories</Text>
         </TouchableOpacity>
       </ShadowBox>
     );
@@ -62,13 +58,15 @@ export class HomePage extends React.Component {
   render() {
     return (
       <React.Fragment>
-        <SafeAreaView>
+        <SafeAreaView style={{backgroundColor:"#fafafa"}}>
           {this.renderHeader()}
+          <View>
+            <ProductSearch {...this.props} />
+          </View>
           <ScrollView>
             <ProductCategoryTiles />
             <Banner title="Min. order amount is 50Rs. Free delivery for orders above 100Rs." />
             <Banner title="Flat 10% off on online payment purchases." />
-            <PLP />
           </ScrollView>
         </SafeAreaView>
       </React.Fragment>
@@ -86,7 +84,7 @@ const styles = StyleSheet.create({
   },
   brandTitle: {},
   brandViewStyle: {
-    flex: 0.3,
+    flex: 0.25,
     flexDirection: "column",
     justifyContent: "center",
     alignItems: "center"

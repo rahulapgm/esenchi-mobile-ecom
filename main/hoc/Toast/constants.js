@@ -1,0 +1,2 @@
+export const TRIGGER_TOAST_ON = "TRIGGER_TOAST_ON";
+export const TRIGGER_TOAST_OFF = "TRIGGER_TOAST_OFF";

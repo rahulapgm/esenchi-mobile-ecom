@@ -10,8 +10,6 @@ const ProductList = props => {
 
   const { productList=[] } = props;
 
-  console.log("ProductList props", props);
-
   return (
     <ScrollView style={{marginBottom:24}}>
       {productList && productList.map((item, index) => {

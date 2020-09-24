@@ -49,7 +49,7 @@ export default function BottomTabNavigator({navigation}) {
 				}}
 			/>
 			<BottomTab.Screen
-				name="Links"
+				name="CartTab"
 				component={CartScreen}
 				options={{
 					title: "C A R T",

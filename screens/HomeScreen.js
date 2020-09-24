@@ -2,20 +2,13 @@ import React, { Suspense, lazy } from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 
-import ProductSearch from "../main/containers/ProductSearch";
 import {
   StyleSheet,
   Platform,
-  StatusBar,
-  TouchableOpacity,
-  View
 } from "react-native";
-
-import { MaterialCommunityIcons } from "react-native-vector-icons";
 
 import { useSafeArea } from "react-native-safe-area-context";
 
-import Brand from "../main/components/common/Brand/Brand";
 import HomePage from "../main/containers/Pages/HomePage/HomePage";
 
 import CategoryDrawer from "../main/containers/CategoryDrawer/CategoryDrawer";
